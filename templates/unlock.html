@@ -94,7 +94,26 @@ body { font-family:'Inter',sans-serif; background:#0b1120; min-height:100vh; col
     <p>Aap FF Emote Panel use kar sakte hain</p>
   </div>
   <a href="/" class="back-btn">← Emote Panel Par Jain</a>
+  {% elif user.pending_payment %}
+  <!-- Screenshot submitted, waiting for admin review -->
+  <div style="background:rgba(217,119,6,0.15);border:2px solid rgba(217,119,6,0.5);border-radius:16px;padding:20px;margin-bottom:20px;text-align:center;">
+    <div style="font-size:2.5rem;margin-bottom:10px;">⏳</div>
+    <h3 style="color:#fbbf24;font-size:1.1rem;margin-bottom:8px;">Screenshot Review Pending</h3>
+    <p style="color:#fde68a;font-size:14px;line-height:1.6;">Aapka payment screenshot admin ko mila hai.<br>Thodi der mein verify ho kar unlock kar diya jayega.</p>
+    <p style="color:#94a3b8;font-size:12px;margin-top:12px;">Agar zyada waqt lag raha ho to WhatsApp karein: <strong style="color:#e2e8f0;">03349039174</strong></p>
+  </div>
+  <a href="/" class="back-btn">← Wapas Jain</a>
   {% else %}
+
+  {% if user.payment_rejected %}
+  <!-- Payment was rejected — show warning and allow re-upload -->
+  <div style="background:rgba(220,38,38,0.15);border:2px solid rgba(220,38,38,0.5);border-radius:16px;padding:20px;margin-bottom:20px;text-align:center;">
+    <div style="font-size:2.5rem;margin-bottom:10px;">❌</div>
+    <h3 style="color:#f87171;font-size:1.1rem;margin-bottom:8px;">Payment Screenshot Reject Hua</h3>
+    <p style="color:#fca5a5;font-size:14px;line-height:1.6;">Admin ne aapka screenshot verify nahi kar paya.<br>Sahi screenshot dobara upload karein.</p>
+    <p style="color:#94a3b8;font-size:12px;margin-top:10px;">Issue ho to WhatsApp: <strong style="color:#e2e8f0;">03349039174</strong></p>
+  </div>
+  {% endif %}
 
   <!-- Payment Details -->
   <div class="pay-card">

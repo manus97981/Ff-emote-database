@@ -210,13 +210,16 @@ function renderCard(u) {
   if(isUnlocked && !isExpired) badges += `<span class="badge badge-green">✅ Unlocked</span> `;
   else if(isExpired)            badges += `<span class="badge badge-red">⌛ Expired</span> `;
   else                          badges += `<span class="badge badge-red">🔒 Locked</span> `;
-  if(isPending) badges += `<span class="badge badge-yellow">⏳ Pending</span>`;
+  if(isPending && hasSS) badges += `<span class="badge badge-yellow">⏳ Pending — Screenshot Submitted</span>`;
+  else if(isPending)     badges += `<span class="badge badge-yellow">⏳ Pending Payment</span>`;
+  // hasSS=0 but was pending means screenshot was rejected (pending cleared, no ss, not unlocked)
 
   let ssHtml = '';
   if(hasSS) ssHtml = `
     <button class="ss-btn" onclick="toggleSS(${u.id},this)">📸 Payment Screenshot</button>
     <div class="ss-preview" id="ss_${u.id}">
-      <img src="/screenshots/${u.id}" loading="lazy">
+      <div id="ssload_${u.id}" style="color:#fbbf24;font-size:12px;padding:6px 0;">⏳ Loading...</div>
+      <img id="ssimg_${u.id}" data-src="/screenshots/${u.id}" alt="Payment Screenshot" style="display:none;width:100%;max-width:380px;border-radius:10px;border:2px solid #d97706;margin-top:8px;">
     </div>`;
 
   let actionBtns = '';
@@ -373,10 +376,12 @@ function updateUserInData(userId, action) {
     ALL_USERS[idx].unlocked = 1;
     ALL_USERS[idx].pending_payment = 0;
     ALL_USERS[idx].has_screenshot = 0;
+    ALL_USERS[idx].payment_rejected = 0;
     ALL_USERS[idx].unlocked_at = new Date().toISOString().replace('T',' ').substring(0,19);
   } else if(action === 'reject') {
     ALL_USERS[idx].pending_payment = 0;
     ALL_USERS[idx].has_screenshot = 0;
+    ALL_USERS[idx].payment_rejected = 1;
   } else if(action === 'unapprove') {
     ALL_USERS[idx].unlocked = 0;
     ALL_USERS[idx].unlocked_at = null;
@@ -474,6 +479,19 @@ function toggleSS(id, btn) {
     el.style.display = 'none'; btn.textContent = '📸 Payment Screenshot';
   } else {
     el.style.display = 'block'; btn.textContent = '🙈 Hide Screenshot';
+    // Load image on first click (avoids lazy-load inside hidden container bug)
+    const img = document.getElementById('ssimg_' + id);
+    const loader = document.getElementById('ssload_' + id);
+    if(img && !img.src) {
+      img.src = img.dataset.src;
+      img.onload = () => {
+        img.style.display = 'block';
+        if(loader) loader.style.display = 'none';
+      };
+      img.onerror = () => {
+        if(loader) loader.textContent = '❌ Screenshot load nahi hua. Refresh karein.';
+      };
+    }
   }
 }
 
