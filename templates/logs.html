@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Live Logs</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+background:black;
+color:#00ff00;
+font-family:monospace;
+padding:15px;
+}
+
+h3{
+margin-bottom:10px;
+}
+
+#logBox{
+white-space:pre-wrap;
+font-size:12px;
+margin-top:10px;
+min-height:200px;
+padding-bottom:70px;
+}
+
+/* LOG BLOCK */
+.log-block{
+margin-bottom:15px;
+padding:8px;
+border-left:2px solid #00ff00;
+}
+
+/* BUTTON */
+.refresh-btn{
+position:fixed;
+bottom:15px;
+left:50%;
+transform:translateX(-50%);
+background:#2563eb;
+color:white;
+border:none;
+padding:12px;
+border-radius:10px;
+cursor:pointer;
+width:90%;
+max-width:400px;
+z-index:999;
+}
+
+.refresh-btn:hover{
+background:#1d4ed8;
+}
+</style>
+
+</head>
+
+<body>
+
+<h3>Live Logs (Grouped)</h3>
+
+<div id="logBox">Waiting for new logs...</div>
+
+<button class="refresh-btn" onclick="loadLogs()">Refresh Logs</button>
+
+<script>
+
+let lastLogs = []
+
+// 🔥 GROUP LOGS BY REQUEST
+function groupLogs(lines){
+    let grouped = []
+    let current = []
+
+    lines.forEach(line => {
+        line = line.trim()
+        if(!line) return
+
+        // 👉 NEW REQUEST START
+        if(line.includes("TEAM:")){
+            if(current.length > 0){
+                grouped.push(current.join("\n"))
+            }
+            current = [line]
+        }else{
+            current.push(line)
+        }
+    })
+
+    if(current.length > 0){
+        grouped.push(current.join("\n"))
+    }
+
+    return grouped
+}
+
+// 🔥 INITIAL LOAD (SET BASELINE)
+window.onload = async () => {
+try{
+let r = await fetch("/logs-data", { credentials: "include" })
+let t = await r.text()
+
+if(t){
+let lines = t.split(/\n|<br>/)
+
+// ❌ remove last incomplete
+if(lines.length > 0) lines.pop()
+
+lines = lines.filter(l => l.trim() !== "")
+
+lastLogs = groupLogs(lines)
+}
+}catch{}
+}
+
+// 🔥 LOAD NEW LOGS
+async function loadLogs(){
+try{
+let r = await fetch("/logs-data", { credentials: "include" })
+let t = await r.text()
+
+if(!t || t.trim() === "") return
+
+let lines = t.split(/\n|<br>/)
+
+// ❌ remove last incomplete
+if(lines.length > 0) lines.pop()
+
+lines = lines.filter(l => l.trim() !== "")
+
+// 🔥 GROUP THEM
+let groupedLogs = groupLogs(lines)
+
+// 🔥 ONLY NEW BLOCKS
+let newLogs = groupedLogs.filter(log => !lastLogs.includes(log))
+
+if(newLogs.length > 0){
+let box = document.getElementById("logBox")
+
+if(box.innerText.includes("Waiting")){
+box.innerHTML = ""
+}
+
+// 🔥 ADD BLOCKS
+box.innerHTML += newLogs.map(log => 
+    `<div class="log-block">${log.replace(/\n/g,"<br>")}</div>`
+).join("")
+
+lastLogs = groupedLogs
+
+box.scrollTop = box.scrollHeight
+}
+
+}catch{
+document.getElementById("logBox").innerHTML = "Error loading logs..."
+}
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shani Store - Access Unlock Karein</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',sans-serif; background:#0b1120; min-height:100vh; color:white; padding:20px; }
+.container { max-width:460px; margin:auto; }
+
+/* Header */
+.header { text-align:center; padding:20px 0 24px; }
+.header h1 { font-size:1.8rem; font-weight:800; background:linear-gradient(135deg,#7c3aed,#3b82f6); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.header p { color:#64748b; font-size:0.9rem; margin-top:6px; }
+
+/* Payment card */
+.pay-card { background:#1e293b; border:2px solid #7c3aed; border-radius:20px; padding:24px; margin-bottom:20px; text-align:center; }
+.pay-card .price-badge { display:inline-block; background:linear-gradient(135deg,#7c3aed,#2563eb); padding:8px 24px; border-radius:50px; font-size:1.5rem; font-weight:800; margin-bottom:16px; }
+.pay-card .duration { color:#94a3b8; font-size:0.85rem; margin-bottom:20px; }
+.pay-detail { background:#0f172a; border-radius:14px; padding:16px; margin-bottom:12px; }
+.pay-detail .label { font-size:11px; color:#64748b; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+.pay-detail .value { font-size:1.2rem; font-weight:700; color:#4ade80; }
+.pay-detail .value.number { font-size:1.5rem; color:#60a5fa; letter-spacing:2px; }
+
+/* Instructions */
+.instructions { background:#1e293b; border-radius:16px; padding:20px; margin-bottom:20px; border:1px solid #334155; }
+.instructions h3 { font-size:1rem; color:#f59e0b; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+.step { display:flex; gap:12px; margin-bottom:14px; align-items:flex-start; }
+.step-num { background:#7c3aed; color:white; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0; margin-top:2px; }
+.step-text { font-size:14px; color:#cbd5e1; line-height:1.5; }
+.step-text strong { color:white; }
+
+/* Video how-to button */
+.video-how-btn { width:100%; padding:14px; background:linear-gradient(135deg,#dc2626,#b91c1c); border:none; border-radius:14px; color:white; font-size:15px; font-weight:700; cursor:pointer; margin-bottom:20px; display:flex; align-items:center; justify-content:center; gap:10px; transition:0.3s; }
+.video-how-btn:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(220,38,38,0.4); }
+
+/* Upload section */
+.upload-section { background:#1e293b; border-radius:16px; padding:20px; margin-bottom:20px; border:1px dashed #334155; }
+.upload-section h3 { font-size:1rem; color:#60a5fa; margin-bottom:14px; }
+.file-upload-area { background:#0f172a; border:2px dashed #334155; border-radius:12px; padding:20px; text-align:center; cursor:pointer; transition:0.3s; margin-bottom:14px; }
+.file-upload-area:hover { border-color:#7c3aed; background:#1a1040; }
+.file-upload-area i { font-size:2rem; color:#64748b; margin-bottom:8px; display:block; }
+.file-upload-area p { font-size:13px; color:#64748b; }
+.file-upload-area.has-file { border-color:#4ade80; }
+.file-upload-area.has-file i { color:#4ade80; }
+.file-upload-area.has-file p { color:#4ade80; }
+#screenshotInput { display:none; }
+.upload-btn { width:100%; padding:12px; background:#2563eb; border:none; border-radius:12px; color:white; font-size:15px; font-weight:700; cursor:pointer; transition:0.3s; }
+.upload-btn:hover { background:#1d4ed8; }
+.upload-btn:disabled { background:#334155; cursor:not-allowed; }
+
+/* Alert */
+.alert { padding:12px 16px; border-radius:12px; margin-bottom:16px; font-size:14px; display:none; }
+.alert.error { background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3); color:#f87171; display:block; }
+.alert.success { background:rgba(34,197,94,0.15); border:1px solid rgba(34,197,94,0.3); color:#4ade80; display:block; }
+
+.back-btn { display:block; text-align:center; color:#94a3b8; text-decoration:none; font-size:14px; padding:10px; margin-top:10px; }
+.back-btn:hover { color:white; }
+
+/* Modal */
+.modal-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.88); z-index:1000; justify-content:center; align-items:center; }
+.modal-overlay.active { display:flex; }
+.modal-box { background:#1e293b; border-radius:18px; padding:20px; max-width:380px; width:90%; text-align:center; border:1px solid #334155; }
+.modal-box iframe { width:100%; height:200px; border-radius:10px; border:none; margin-bottom:14px; }
+.modal-box p { font-size:13px; color:#94a3b8; margin-bottom:14px; }
+.modal-close { background:#dc2626; color:white; border:none; padding:8px 22px; border-radius:8px; cursor:pointer; font-size:14px; font-weight:600; }
+
+/* Already unlocked badge */
+.unlocked-badge { background:rgba(34,197,94,0.15); border:1px solid rgba(34,197,94,0.3); border-radius:14px; padding:16px; text-align:center; margin-bottom:20px; }
+.unlocked-badge h3 { color:#4ade80; font-size:1.1rem; margin-bottom:4px; }
+.unlocked-badge p { color:#86efac; font-size:13px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>🔓 Access Unlock Karein</h1>
+    <p>30 din ke liye FF Emote Panel use karein</p>
+  </div>
+
+  {% if user.unlocked %}
+  <div class="unlocked-badge">
+    <h3>✅ Aapka Account Unlock Hai!</h3>
+    <p>Aap FF Emote Panel use kar sakte hain</p>
+  </div>
+  <a href="/" class="back-btn">← Emote Panel Par Jain</a>
+  {% else %}
+
+  <!-- Payment Details -->
+  <div class="pay-card">
+    <div class="price-badge">Rs. 300</div>
+    <div class="duration">📅 30 Din ke Liye Unlock</div>
+    <div class="pay-detail">
+      <div class="label">Easypaisa Number</div>
+      <div class="value number">03179537719</div>
+    </div>
+    <div class="pay-detail">
+      <div class="label">Account Name</div>
+      <div class="value">MUHAMMAD SHAYAN KHAN</div>
+    </div>
+    <div class="pay-detail">
+      <div class="label">Payment Method</div>
+      <div class="value">📱 EASYPAISA</div>
+    </div>
+  </div>
+
+  <!-- Kolne ka tarika video button -->
+  <button class="video-how-btn" onclick="openKolneVideo()">
+    <i class="fab fa-youtube"></i> Kolne Ka Tarika — Video Dekhein
+  </button>
+
+  <!-- Instructions -->
+  <div class="instructions">
+    <h3><i class="fas fa-list-ol"></i> Instructions</h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Payment <strong>isi number ka Easypaisa par karna</strong>: 03179537719 (Muhammad Shayan Khan)</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">Screenshot <strong>full upload karna</strong> — <strong>sender ka naam show hona chahiye</strong> screenshot mein</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">Amount <strong>300 se kam ya zyada na ho</strong> — bilkul 300 send karein</div>
+    </div>
+  </div>
+
+  <!-- Screenshot Upload -->
+  <div class="upload-section">
+    <h3>📸 Payment Screenshot Upload Karein</h3>
+    <div class="alert" id="uploadAlert"></div>
+    <div class="file-upload-area" id="uploadArea" onclick="document.getElementById('screenshotInput').click()">
+      <i class="fas fa-cloud-upload-alt" id="uploadIcon"></i>
+      <p id="uploadText">Screenshot select karein (JPG, PNG)</p>
+    </div>
+    <input type="file" id="screenshotInput" accept="image/*" onchange="onFileSelect(this)">
+    <button class="upload-btn" id="uploadBtn" onclick="uploadScreenshot()" disabled>
+      📤 Screenshot Submit Karein
+    </button>
+  </div>
+
+  <a href="/" class="back-btn">← Wapas Jain</a>
+  {% endif %}
+</div>
+
+<!-- Kolne ka tarika video modal -->
+<div class="modal-overlay" id="kolneModal">
+  <div class="modal-box">
+    <iframe id="kolneFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <p>Yeh video dekh kar samjhein ke Easypaisa par payment kaise karein</p>
+    <button class="modal-close" onclick="closeKolneVideo()">Close ✕</button>
+  </div>
+</div>
+
+<script>
+function openKolneVideo() {
+  document.getElementById('kolneFrame').src = 'https://www.youtube.com/embed/FkdxnfP8hL4?autoplay=1';
+  document.getElementById('kolneModal').classList.add('active');
+}
+function closeKolneVideo() {
+  document.getElementById('kolneFrame').src = '';
+  document.getElementById('kolneModal').classList.remove('active');
+}
+document.getElementById('kolneModal').addEventListener('click', function(e) {
+  if(e.target === this) closeKolneVideo();
+});
+
+let selectedFile = null;
+
+function onFileSelect(input) {
+  if(input.files && input.files[0]) {
+    selectedFile = input.files[0];
+    document.getElementById('uploadArea').classList.add('has-file');
+    document.getElementById('uploadIcon').className = 'fas fa-check-circle';
+    document.getElementById('uploadText').textContent = selectedFile.name;
+    document.getElementById('uploadBtn').disabled = false;
+  }
+}
+
+function showAlert(msg, type) {
+  const el = document.getElementById('uploadAlert');
+  el.textContent = msg;
+  el.className = 'alert ' + type;
+  setTimeout(() => el.className = 'alert', 6000);
+}
+
+async function uploadScreenshot() {
+  if(!selectedFile) { showAlert('Pehle screenshot select karein', 'error'); return; }
+  const btn = document.getElementById('uploadBtn');
+  btn.disabled = true;
+  btn.textContent = 'Uploading...';
+  const formData = new FormData();
+  formData.append('screenshot', selectedFile);
+  try {
+    const res = await fetch('/api/upload-screenshot', { method:'POST', body:formData });
+    const data = await res.json();
+    if(res.ok && data.success) {
+      showAlert('✅ ' + data.message, 'success');
+      btn.textContent = '✅ Submitted';
+      document.getElementById('uploadArea').classList.remove('has-file');
+      document.getElementById('uploadIcon').className = 'fas fa-cloud-upload-alt';
+      document.getElementById('uploadText').textContent = 'Screenshot select karein (JPG, PNG)';
+      selectedFile = null;
+    } else {
+      showAlert(data.error || 'Upload failed', 'error');
+      btn.disabled = false;
+      btn.textContent = '📤 Screenshot Submit Karein';
+    }
+  } catch(e) {
+    showAlert('Network error. Please try again.', 'error');
+    btn.disabled = false;
+    btn.textContent = '📤 Screenshot Submit Karein';
+  }
+}
+</script>
+</body>
+</html>

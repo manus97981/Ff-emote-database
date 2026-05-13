@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shani Store - FF Emote Panel</title>
+<meta name="description" content="Shani Store Free Fire emote panel. Send emotes using UID and team code instantly.">
+<meta name="keywords" content="shani store, free fire emote panel, ff emote, send emote free fire">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;}
+body{background:#000;color:white;font-family:'Inter',sans-serif;text-align:center;margin:0;padding:0;}
+.container{max-width:420px;margin:auto;padding:15px;}
+
+/* Top bar */
+.topbar{display:flex;justify-content:space-between;align-items:center;background:#0f172a;padding:10px 15px;border-bottom:1px solid #1e293b;position:sticky;top:0;z-index:100;}
+.topbar .site-title{font-size:1rem;font-weight:700;color:#60a5fa;}
+.topbar .auth-btns{display:flex;gap:8px;}
+.topbar .auth-btns a{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;cursor:pointer;}
+.topbar .btn-login{background:#1e293b;color:#94a3b8;border:1px solid #334155;}
+.topbar .btn-register{background:#2563eb;color:white;}
+.topbar .user-info{display:flex;align-items:center;gap:8px;font-size:12px;color:#94a3b8;}
+.topbar .btn-logout{background:#dc2626;color:white;padding:5px 10px;border:none;border-radius:6px;font-size:11px;cursor:pointer;}
+
+/* Unlock banner */
+.unlock-banner{background:linear-gradient(135deg,#7c3aed,#2563eb);margin:10px 0;padding:14px;border-radius:14px;cursor:pointer;animation:pulse 2s infinite;}
+.unlock-banner h3{font-size:15px;margin:0 0 4px;}
+.unlock-banner p{font-size:12px;color:rgba(255,255,255,0.85);margin:0;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(124,58,237,0.4)}50%{box-shadow:0 0 0 10px rgba(124,58,237,0)}}
+
+h1{font-size:1.6rem;margin:10px 0 2px;}
+h2{font-size:1rem;color:#94a3b8;margin:0 0 10px;font-weight:400;}
+.safe-note{font-size:11px;color:#64748b;margin-bottom:10px;}
+
+input{width:100%;padding:12px;margin:6px 0;border-radius:10px;border:none;background:#1e293b;color:white;font-family:inherit;font-size:14px;}
+input::placeholder{color:#64748b;}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;}
+.card{background:#1e293b;padding:6px;border-radius:10px;height:120px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;}
+.card img{width:100%;height:55px;object-fit:contain;opacity:0.4;transition:0.3s;}
+.card img.loaded{opacity:1;}
+.card div{font-size:10px;color:#94a3b8;}
+.card button{width:95%;padding:5px;border:none;border-radius:6px;background:#2563eb;color:white;font-size:10px;cursor:pointer;}
+.card button:hover{background:#1d4ed8;}
+.success{background:#16a34a !important;}
+
+#moreBtn{margin-top:15px;padding:10px;border:none;border-radius:10px;background:#dc2626;color:white;width:100%;cursor:pointer;font-size:14px;}
+
+.whatsapp-btn{background:#dc2626;width:100%;margin-top:8px;padding:12px;border:none;border-radius:10px;color:white;cursor:pointer;font-size:14px;}
+.headshot-btn{background:#7c3aed;width:100%;margin-top:8px;padding:12px;border:none;border-radius:10px;color:white;font-size:14px;cursor:pointer;}
+.howtouse-btn{background:#0f766e;width:100%;margin-top:8px;padding:12px;border:none;border-radius:10px;color:white;font-size:14px;cursor:pointer;}
+
+.follow{margin:10px 0;color:#aaa;font-size:13px;}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#111;padding:10px 15px;border-radius:10px;opacity:0;transition:0.3s;z-index:999;font-size:14px;border:1px solid #334155;}
+.toast.show{opacity:1;}
+.spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top:2px solid white;border-radius:50%;animation:spin 1s linear infinite;margin:auto;}
+@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.switch{position:relative;display:inline-block;width:50px;height:24px;}
+.switch input{opacity:0;width:0;height:0;}
+.slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:#1e293b;transition:.4s;border-radius:24px;}
+.slider:before{position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background-color:white;transition:.4s;border-radius:50%;}
+input:checked+.slider{background-color:#2563eb;}
+input:checked+.slider:before{transform:translateX(26px);}
+
+/* Modals */
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:1000;justify-content:center;align-items:center;}
+.modal-overlay.active{display:flex;}
+.modal-box{background:#1e293b;border-radius:16px;padding:20px;max-width:380px;width:90%;text-align:center;border:1px solid #334155;}
+.modal-box iframe{width:100%;height:200px;border-radius:10px;border:none;margin-bottom:12px;}
+.modal-box .buy-text{font-size:14px;color:#e2e8f0;margin-bottom:14px;line-height:1.6;}
+.modal-box .buy-text span{color:#4ade80;font-weight:700;}
+.modal-close{background:#dc2626;color:white;border:none;padding:8px 20px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;}
+
+/* Lock overlay for send action */
+.lock-msg{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:14px;margin-top:10px;font-size:13px;color:#94a3b8;display:none;}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="site-title">⚡ Shani Store</div>
+  {% if user %}
+  <div class="user-info">
+    <span>👤 {{ user.username }}</span>
+    <button class="btn-logout" onclick="doLogout()">Logout</button>
+  </div>
+  {% else %}
+  <div class="auth-btns">
+    <a class="btn-login" href="/login">Login</a>
+    <a class="btn-register" href="/login">Register</a>
+  </div>
+  {% endif %}
+</div>
+
+<div class="container">
+
+<h1>Shani Store</h1>
+<h2>FF Emote Panel</h2>
+<p class="safe-note">SAFE BUT STILL USE ON YOUR OWN RISK</p>
+
+<!-- Unlock banner (show if logged in but not unlocked, or not logged in) -->
+{% if not user %}
+<div class="unlock-banner" onclick="window.location.href='/login'">
+  <h3>🔓 Login Required to Send Emotes</h3>
+  <p>Create free account → Unlock access → Send emotes!</p>
+</div>
+{% elif not user.unlocked %}
+<div class="unlock-banner" onclick="window.location.href='/unlock'">
+  <h3>🔒 Access Locked — Click to Unlock!</h3>
+  <p>Pay Rs. 300 via Easypaisa to unlock for 30 days</p>
+</div>
+{% endif %}
+
+<button class="whatsapp-btn" onclick="window.open('https://chat.whatsapp.com/F8hWihi99bYF05isQysF94')">
+  ID BUY AND SELL GROUP
+</button>
+
+<button class="headshot-btn" onclick="openModal('headshotModal','https://www.youtube.com/embed/p-dThBfhXEI?autoplay=1')">
+  🎯 Headshot Panel
+</button>
+
+<button class="howtouse-btn" onclick="openModal('howToUseModal','https://www.youtube.com/embed/FkdxnfP8hL4?autoplay=1')">
+  📖 How To Use
+</button>
+
+<input id="uid" placeholder="Enter UID">
+<input id="team" placeholder="Enter Team Code" maxlength="7" inputmode="numeric">
+
+<div style="display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0;">
+  <span style="font-size:13px;color:#94a3b8;">No Bot</span>
+  <label class="switch">
+    <input type="checkbox" id="noBot">
+    <span class="slider"></span>
+  </label>
+</div>
+
+<div class="grid" id="buttons"></div>
+<button id="moreBtn" onclick="loadMore()">See More</button>
+
+</div>
+
+<!-- Headshot Panel Popup -->
+<div class="modal-overlay" id="headshotModal">
+  <div class="modal-box">
+    <iframe id="headshotFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div class="buy-text"><span>03349039174</span><br>Price = 500<br>Msg To Buy On Whatsapp</div>
+    <button class="modal-close" onclick="closeModal('headshotModal','headshotFrame')">Close ✕</button>
+  </div>
+</div>
+
+<!-- How To Use Popup -->
+<div class="modal-overlay" id="howToUseModal">
+  <div class="modal-box">
+    <iframe id="howToUseFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div class="buy-text"><span>How To Use</span><br>Watch the video to learn</div>
+    <button class="modal-close" onclick="closeModal('howToUseModal','howToUseFrame')">Close ✕</button>
+  </div>
+</div>
+
+<!-- Login Required Modal -->
+<div class="modal-overlay" id="loginRequiredModal">
+  <div class="modal-box">
+    <div style="font-size:2.5rem;margin-bottom:10px;">🔒</div>
+    <div class="buy-text" style="font-size:15px;margin-bottom:16px;">
+      <span>Account Required!</span><br>
+      Emotes bhejna ke liye login ya register karein
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center;">
+      <button onclick="window.location.href='/login'" style="background:#2563eb;color:white;border:none;padding:10px 20px;border-radius:10px;cursor:pointer;font-weight:600;">Login / Register</button>
+      <button onclick="closeSimpleModal('loginRequiredModal')" style="background:#334155;color:white;border:none;padding:10px 16px;border-radius:10px;cursor:pointer;">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Unlock Required Modal -->
+<div class="modal-overlay" id="unlockRequiredModal">
+  <div class="modal-box">
+    <div style="font-size:2.5rem;margin-bottom:10px;">🔓</div>
+    <div class="buy-text" style="font-size:15px;margin-bottom:16px;">
+      <span>Access Locked!</span><br>
+      Emote panel unlock karne ke liye<br>Rs. 300 send karein
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+      <button onclick="window.location.href='/unlock'" style="background:#7c3aed;color:white;border:none;padding:10px 20px;border-radius:10px;cursor:pointer;font-weight:600;">Unlock Karein →</button>
+      <button onclick="closeSimpleModal('unlockRequiredModal')" style="background:#334155;color:white;border:none;padding:10px 16px;border-radius:10px;cursor:pointer;">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+const IS_LOGGED_IN = {{ 'true' if user else 'false' }};
+const IS_UNLOCKED = {{ 'true' if user and user.unlocked else 'false' }};
+
+function openModal(id, src) {
+  const frameId = id.replace('Modal','Frame');
+  document.getElementById(frameId).src = src;
+  document.getElementById(id).classList.add('active');
+}
+function closeModal(id, frameId) {
+  document.getElementById(frameId).src = '';
+  document.getElementById(id).classList.remove('active');
+}
+function closeSimpleModal(id) {
+  document.getElementById(id).classList.remove('active');
+}
+
+['headshotModal','howToUseModal','loginRequiredModal','unlockRequiredModal'].forEach(id => {
+  document.getElementById(id).addEventListener('click', function(e){
+    if(e.target === this) {
+      if(id === 'headshotModal') closeModal('headshotModal','headshotFrame');
+      else if(id === 'howToUseModal') closeModal('howToUseModal','howToUseFrame');
+      else closeSimpleModal(id);
+    }
+  });
+});
+
+async function doLogout() {
+  await fetch('/api/auth/logout', {method:'POST'});
+  window.location.reload();
+}
+
+document.getElementById('team').addEventListener('input', function(){
+  this.value = this.value.replace(/\D/g,'').slice(0,7);
+});
+
+function showToast(msg){
+  let t = document.getElementById('toast');
+  t.innerText = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2500);
+}
+
+let allData = [], limit = 20;
+loadData();
+
+function loadData(){
+  fetch('/static/final_links.json')
+  .then(r=>r.json())
+  .then(data=>{
+    allData = data.slice(0,limit);
+    render();
+  });
+}
+
+function render(){
+  let box = document.getElementById('buttons');
+  box.innerHTML = '';
+  for(let item of allData) createCard(item.name, item.id, item.image);
+}
+
+function createCard(name, id, imgUrl){
+  let box = document.getElementById('buttons');
+  let card = document.createElement('div'); card.className='card';
+  let img = document.createElement('img');
+  img.src='https://via.placeholder.com/100x60?text=...'; img.loading='lazy';
+  let ri = new Image(); ri.src=imgUrl;
+  ri.onload=()=>{img.src=ri.src; img.classList.add('loaded');};
+  let nd = document.createElement('div'); nd.innerText=name;
+  let btn = document.createElement('button'); btn.innerText='Send';
+  btn.onclick=()=>sendEmote(id,btn);
+  card.appendChild(img); card.appendChild(nd); card.appendChild(btn);
+  box.appendChild(card);
+}
+
+let lastSendTime = {};
+
+async function sendEmote(id, btn){
+  if(!IS_LOGGED_IN){ document.getElementById('loginRequiredModal').classList.add('active'); return; }
+  if(!IS_UNLOCKED){ document.getElementById('unlockRequiredModal').classList.add('active'); return; }
+
+  let uid = document.getElementById('uid').value;
+  let team = document.getElementById('team').value;
+  if(!uid||!team){ showToast('Enter UID & Team Code'); return; }
+  let now = Date.now()/1000;
+  if(lastSendTime[uid]&&(now-lastSendTime[uid])<1){
+    let wait=(1-(now-lastSendTime[uid])).toFixed(1);
+    showToast(`Please wait ${wait}s ⏱️`); return;
+  }
+  lastSendTime[uid]=now;
+  let orig=btn.innerText; btn.innerHTML='<div class="spinner"></div>'; btn.disabled=true;
+  let noBot=document.getElementById('noBot').checked;
+  try{
+    let r=await fetch('/send',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:`uid=${uid}&team=${team}&emote=${id}&no_bot=${noBot}`});
+    let d=await r.json();
+    if(d.status==='success'){btn.innerText='✔ Sent';btn.classList.add('success');showToast('Success ✅');}
+    else if(d.status==='blocked') showToast('You are Blocked ❌');
+    else if(d.status==='login_required'){document.getElementById('loginRequiredModal').classList.add('active');}
+    else if(d.status==='unlock_required'){document.getElementById('unlockRequiredModal').classList.add('active');}
+    else if(d.status==='fail') showToast('Failed to send ❌');
+    else showToast('Error ❌');
+  }catch(e){showToast('Server Error ❌');}
+  setTimeout(()=>{btn.innerText=orig;btn.disabled=false;btn.classList.remove('success');},1500);
+}
+
+function loadMore(){ limit+=50; loadData(); }
+</script>
+</body>
+</html>

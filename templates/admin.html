@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shani Store - Admin</title>
+<style>
+*{box-sizing:border-box;}
+body{background:#0b1120;color:white;font-family:sans-serif;padding:20px;}
+h1{color:#60a5fa;margin-bottom:20px;}
+.section{background:#1e293b;border-radius:14px;padding:16px;margin-bottom:20px;border:1px solid #334155;}
+h2{font-size:1rem;color:#94a3b8;margin-bottom:14px;}
+input{padding:8px 12px;background:#0f172a;border:1px solid #334155;border-radius:8px;color:white;margin-right:8px;}
+button{padding:8px 14px;border:none;border-radius:8px;cursor:pointer;font-weight:600;}
+.btn-red{background:#dc2626;color:white;}
+.btn-green{background:#16a34a;color:white;}
+.btn-blue{background:#2563eb;color:white;}
+.btn-gray{background:#475569;color:white;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{text-align:left;padding:8px;color:#64748b;border-bottom:1px solid #334155;}
+td{padding:8px;border-bottom:1px solid #1e293b;vertical-align:middle;}
+.badge{display:inline-block;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600;}
+.badge-green{background:rgba(22,163,74,0.2);color:#4ade80;border:1px solid rgba(22,163,74,0.3);}
+.badge-red{background:rgba(220,38,38,0.2);color:#f87171;border:1px solid rgba(220,38,38,0.3);}
+.badge-yellow{background:rgba(234,179,8,0.2);color:#fbbf24;border:1px solid rgba(234,179,8,0.3);}
+.nav-links{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+.nav-links a{color:#60a5fa;text-decoration:none;font-size:14px;padding:6px 12px;background:#1e293b;border-radius:8px;}
+</style>
+</head>
+<body>
+<h1>⚡ Shani Store — Admin Panel</h1>
+<div class="nav-links">
+  <a href="/">Home</a>
+  <a href="/logs">Logs</a>
+  <a href="/logout">Logout</a>
+</div>
+
+<!-- Block UID -->
+<div class="section">
+  <h2>🚫 Block / Unblock UID</h2>
+  <form method="POST" action="/block" style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+    <input name="uid" placeholder="Enter UID to block">
+    <button type="submit" class="btn-red">Block</button>
+  </form>
+  {% if uids %}
+  <table>
+    <tr><th>Blocked UID</th><th>Action</th></tr>
+    {% for uid in uids %}
+    <tr>
+      <td>{{ uid }}</td>
+      <td>
+        <form method="POST" action="/unblock" style="display:inline;">
+          <input type="hidden" name="uid" value="{{ uid }}">
+          <button type="submit" class="btn-green">Unblock</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p style="color:#64748b;font-size:13px;">No blocked UIDs</p>
+  {% endif %}
+</div>
+
+<!-- Users Table -->
+<div class="section">
+  <h2>👥 Registered Users</h2>
+  {% if users %}
+  <table>
+    <tr><th>Username</th><th>Email</th><th>Status</th><th>Payment</th><th>Action</th></tr>
+    {% for email, u in users.items() %}
+    <tr>
+      <td>{{ u.username }}</td>
+      <td style="font-size:11px;color:#94a3b8;">{{ email }}</td>
+      <td>
+        {% if u.unlocked %}
+        <span class="badge badge-green">✅ Unlocked</span>
+        {% else %}
+        <span class="badge badge-red">🔒 Locked</span>
+        {% endif %}
+      </td>
+      <td>
+        {% if u.pending_payment %}
+        <span class="badge badge-yellow">⏳ Pending</span>
+        {% if u.screenshot %}
+        <br><a href="/screenshots/{{ u.screenshot }}" target="_blank" style="font-size:11px;color:#60a5fa;">View SS</a>
+        {% endif %}
+        {% else %}
+        <span style="color:#64748b;font-size:11px;">—</span>
+        {% endif %}
+      </td>
+      <td>
+        {% if not u.unlocked %}
+        <form method="POST" action="/admin/unlock-user" style="display:inline;">
+          <input type="hidden" name="email" value="{{ email }}">
+          <button type="submit" class="btn-green" style="font-size:12px;padding:5px 10px;">Unlock ✓</button>
+        </form>
+        {% else %}
+        <span style="color:#4ade80;font-size:12px;">Active</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p style="color:#64748b;font-size:13px;">No registered users yet</p>
+  {% endif %}
+</div>
+
+</body>
+</html>

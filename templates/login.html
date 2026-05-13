@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shani Store - Login / Register</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',sans-serif; background:#0b1120; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; }
+:root { --blue:#3b82f6; --blue-dark:#2563eb; --blue-light:#60a5fa; --bg-card:#1e293b; --border:#334155; --text:#e2e8f0; --text-dim:#94a3b8; }
+.bg-effect { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; background:radial-gradient(ellipse at 30% 40%, rgba(59,130,246,0.08) 0%, transparent 50%); }
+.auth-wrap { width:100%; max-width:460px; }
+.auth-card { background:var(--bg-card); border:1px solid var(--border); border-radius:28px; width:100%; padding:2.5rem; box-shadow:0 25px 50px -12px rgba(0,0,0,0.5); animation:fadeIn 0.5s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.logo { text-align:center; margin-bottom:1.5rem; }
+.logo h1 { font-size:1.8rem; font-weight:700; background:linear-gradient(135deg,var(--blue),var(--blue-light)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.logo p { color:var(--text-dim); font-size:0.85rem; margin-top:0.3rem; }
+
+/* Video buttons */
+.video-btns { display:flex; flex-direction:column; gap:10px; margin-bottom:1.5rem; }
+.video-btn { display:flex; align-items:center; justify-content:center; gap:10px; padding:12px 16px; border:none; border-radius:14px; font-size:0.9rem; font-weight:600; cursor:pointer; transition:0.3s; width:100%; }
+.video-btn.how-to { background:linear-gradient(135deg,#dc2626,#b91c1c); color:white; }
+.video-btn.how-to:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(220,38,38,0.4); }
+.video-btn.headshot { background:linear-gradient(135deg,#7c3aed,#5b21b6); color:white; }
+.video-btn.headshot:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(124,58,237,0.4); }
+.video-btn i { font-size:1.1rem; }
+
+.tabs { display:flex; gap:1rem; margin-bottom:2rem; border-bottom:1px solid var(--border); }
+.tab { flex:1; text-align:center; padding:0.8rem; background:none; border:none; font-size:1rem; font-weight:600; color:var(--text-dim); cursor:pointer; transition:0.3s; position:relative; }
+.tab.active { color:var(--blue); }
+.tab.active::after { content:''; position:absolute; bottom:-1px; left:0; right:0; height:2px; background:var(--blue); }
+.form { display:none; animation:fadeIn 0.3s ease; }
+.form.active { display:block; }
+.input-group { margin-bottom:1.2rem; }
+.input-group input { width:100%; padding:0.9rem 1rem; background:#0f172a; border:1px solid var(--border); border-radius:14px; font-size:0.95rem; color:white; font-family:inherit; transition:0.3s; }
+.input-group input:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(59,130,246,0.2); }
+.input-group input::placeholder { color:#64748b; }
+.checkbox-group { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; font-size:0.85rem; }
+.checkbox { display:flex; align-items:center; gap:8px; cursor:pointer; color:var(--text-dim); }
+.checkbox input { width:16px; height:16px; cursor:pointer; accent-color:var(--blue); }
+.btn { width:100%; padding:0.9rem; background:var(--blue); border:none; border-radius:14px; font-size:1rem; font-weight:600; color:white; cursor:pointer; transition:0.3s; margin-bottom:1rem; }
+.btn:hover { background:var(--blue-dark); transform:translateY(-2px); box-shadow:0 10px 25px rgba(59,130,246,0.3); }
+.alert { padding:0.8rem; border-radius:12px; margin-bottom:1rem; font-size:0.85rem; display:none; }
+.alert.error { background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3); color:#f87171; display:block; }
+.alert.success { background:rgba(34,197,94,0.15); border:1px solid rgba(34,197,94,0.3); color:#4ade80; display:block; }
+.terms-text { font-size:0.75rem; color:var(--text-dim); text-align:center; margin-top:1rem; }
+
+/* Video popup modal */
+.modal-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:1000; justify-content:center; align-items:center; }
+.modal-overlay.active { display:flex; }
+.modal-box { background:#1e293b; border-radius:18px; padding:20px; max-width:380px; width:90%; text-align:center; border:1px solid #334155; }
+.modal-box iframe { width:100%; height:200px; border-radius:10px; border:none; margin-bottom:12px; }
+.modal-box .modal-title { font-size:14px; color:#94a3b8; margin-bottom:14px; }
+.modal-close { background:#dc2626; color:white; border:none; padding:8px 22px; border-radius:8px; cursor:pointer; font-size:14px; font-weight:600; }
+.modal-close:hover { background:#b91c1c; }
+</style>
+</head>
+<body>
+<div class="bg-effect"></div>
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="logo">
+      <h1>⚡ Shani Store</h1>
+      <p>FF Emote Panel — Login or Register</p>
+    </div>
+
+    <!-- Video Buttons -->
+    <div class="video-btns">
+      <button class="video-btn how-to" onclick="openVideoModal('how-to')">
+        <i class="fab fa-youtube"></i> Istamal Karna Ka Tarika (How To Use)
+      </button>
+      <button class="video-btn headshot" onclick="openVideoModal('headshot')">
+        <i class="fas fa-crosshairs"></i> Headshot Panel — Dekhein
+      </button>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" data-form="login">Login</button>
+      <button class="tab" data-form="signup">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <div class="form active" id="loginForm">
+      <div class="alert" id="loginAlert"></div>
+      <div class="input-group">
+        <input type="email" id="loginEmail" placeholder="Email address" required>
+      </div>
+      <div class="input-group">
+        <input type="password" id="loginPassword" placeholder="Password" required>
+      </div>
+      <div class="checkbox-group">
+        <label class="checkbox">
+          <input type="checkbox" id="rememberMe"> Remember me
+        </label>
+      </div>
+      <button class="btn" onclick="doLogin()">Login</button>
+    </div>
+
+    <!-- Register Form -->
+    <div class="form" id="signupForm">
+      <div class="alert" id="signupAlert"></div>
+      <div class="input-group">
+        <input type="text" id="signupName" placeholder="Full name / Username" required>
+      </div>
+      <div class="input-group">
+        <input type="email" id="signupEmail" placeholder="Email address" required>
+      </div>
+      <div class="input-group">
+        <input type="password" id="signupPassword" placeholder="Password (min 6 characters)" required>
+      </div>
+      <div class="input-group">
+        <input type="password" id="signupConfirm" placeholder="Confirm password" required>
+      </div>
+      <div class="checkbox-group">
+        <label class="checkbox">
+          <input type="checkbox" id="termsCheck"> I agree to the Terms
+        </label>
+      </div>
+      <button class="btn" onclick="doRegister()">Create Account</button>
+    </div>
+
+    <div class="terms-text">Shani Store &copy; 2024 — All Rights Reserved</div>
+  </div>
+</div>
+
+<!-- How To Use Video Popup -->
+<div class="modal-overlay" id="howToModal">
+  <div class="modal-box">
+    <iframe id="howToFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div class="modal-title">How To Use — Istamal Karna Ka Tarika</div>
+    <button class="modal-close" onclick="closeVideoModal('how-to')">Close ✕</button>
+  </div>
+</div>
+
+<!-- Headshot Panel Video Popup -->
+<div class="modal-overlay" id="headshotModal">
+  <div class="modal-box">
+    <iframe id="headshotFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div class="modal-title">🎯 Headshot Panel — 03349039174 | Price = 500</div>
+    <button class="modal-close" onclick="closeVideoModal('headshot')">Close ✕</button>
+  </div>
+</div>
+
+<script>
+// Tab switching
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const formId = tab.dataset.form;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelectorAll('.form').forEach(f => f.classList.remove('active'));
+    document.getElementById(formId + 'Form').classList.add('active');
+  });
+});
+
+// Auto-fill if remembered
+const savedEmail = localStorage.getItem('shani_saved_email');
+if(savedEmail) {
+  document.getElementById('loginEmail').value = savedEmail;
+  document.getElementById('rememberMe').checked = true;
+}
+
+function showAlert(id, msg, type) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = 'alert ' + type;
+  setTimeout(() => el.className = 'alert', 4000);
+}
+
+async function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const remember = document.getElementById('rememberMe').checked;
+  if(!email || !password) { showAlert('loginAlert','Please fill in all fields','error'); return; }
+  try {
+    const res = await fetch('/api/auth/login', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email, password})
+    });
+    const data = await res.json();
+    if(res.ok && data.success) {
+      if(remember) localStorage.setItem('shani_saved_email', email);
+      else localStorage.removeItem('shani_saved_email');
+      showAlert('loginAlert','Login successful! Redirecting...','success');
+      setTimeout(() => window.location.href = '/', 1200);
+    } else {
+      showAlert('loginAlert', data.error || 'Login failed', 'error');
+    }
+  } catch(e) {
+    showAlert('loginAlert','Network error. Please try again.','error');
+  }
+}
+
+async function doRegister() {
+  const username = document.getElementById('signupName').value.trim();
+  const email = document.getElementById('signupEmail').value.trim();
+  const password = document.getElementById('signupPassword').value;
+  const confirm = document.getElementById('signupConfirm').value;
+  const terms = document.getElementById('termsCheck').checked;
+  if(!username || !email || !password || !confirm) { showAlert('signupAlert','Please fill all fields','error'); return; }
+  if(password !== confirm) { showAlert('signupAlert','Passwords do not match','error'); return; }
+  if(password.length < 6) { showAlert('signupAlert','Password must be at least 6 characters','error'); return; }
+  if(!terms) { showAlert('signupAlert','Please agree to the Terms','error'); return; }
+  try {
+    const res = await fetch('/api/auth/register', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({username, email, password})
+    });
+    const data = await res.json();
+    if(res.ok && data.success) {
+      showAlert('signupAlert','Account created! Logging in...','success');
+      setTimeout(async () => {
+        const r2 = await fetch('/api/auth/login', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({email, password})
+        });
+        const d2 = await r2.json();
+        if(r2.ok && d2.success) window.location.href = '/';
+        else { document.getElementById('loginEmail').value = email; document.querySelector('.tab[data-form="login"]').click(); }
+      }, 1500);
+    } else {
+      showAlert('signupAlert', data.error || 'Registration failed', 'error');
+    }
+  } catch(e) {
+    showAlert('signupAlert','Network error. Please try again.','error');
+  }
+}
+
+// Video modals
+function openVideoModal(type) {
+  if(type === 'how-to') {
+    document.getElementById('howToFrame').src = 'https://www.youtube.com/embed/FkdxnfP8hL4?autoplay=1';
+    document.getElementById('howToModal').classList.add('active');
+  } else {
+    document.getElementById('headshotFrame').src = 'https://www.youtube.com/embed/p-dThBfhXEI?autoplay=1';
+    document.getElementById('headshotModal').classList.add('active');
+  }
+}
+function closeVideoModal(type) {
+  if(type === 'how-to') {
+    document.getElementById('howToFrame').src = '';
+    document.getElementById('howToModal').classList.remove('active');
+  } else {
+    document.getElementById('headshotFrame').src = '';
+    document.getElementById('headshotModal').classList.remove('active');
+  }
+}
+document.getElementById('howToModal').addEventListener('click', e => { if(e.target===document.getElementById('howToModal')) closeVideoModal('how-to'); });
+document.getElementById('headshotModal').addEventListener('click', e => { if(e.target===document.getElementById('headshotModal')) closeVideoModal('headshot'); });
+</script>
+</body>
+</html>
