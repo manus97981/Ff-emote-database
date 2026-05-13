@@ -173,16 +173,11 @@ function updateBadges() {
   document.getElementById('statPending').textContent    = state.pending.data.length;
 }
 
+// days_remaining is now pre-calculated by Python server — no date math in JS
 function calcDaysLeft(u) {
-  if (!u.unlocked || !u.unlocked_at) return null;
-  // MySQL returns "YYYY-MM-DD HH:MM:SS" — replace space with T and append Z so all
-  // browsers parse it correctly as UTC (without Z some browsers treat it as local time
-  // or return NaN entirely).
-  const raw = String(u.unlocked_at).trim().replace(' ', 'T') + 'Z';
-  const unlockedAt = new Date(raw);
-  if (isNaN(unlockedAt.getTime())) return null;   // guard against unexpected formats
-  const expiry = new Date(unlockedAt.getTime() + 30 * 24 * 60 * 60 * 1000);
-  return Math.ceil((expiry - new Date()) / (1000 * 60 * 60 * 24));
+  if (!u.unlocked) return null;
+  if (u.days_remaining === null || u.days_remaining === undefined) return null;
+  return u.days_remaining;
 }
 
 function renderCard(u) {
@@ -233,7 +228,14 @@ function renderCard(u) {
   }
   if(isUnlocked && !isExpired) {
     actionBtns += `<button class="btn btn-orange" onclick="doAction('unapprove',${u.id},this)">🔒 Unapprove</button>`;
-    actionBtns += `<button class="btn btn-blue"   onclick="doAction('extend',${u.id},this)" title="30-din timer reset karein">🔄 Extend</button>`;
+    actionBtns += `
+      <span style="display:inline-flex;align-items:center;gap:4px;background:#0f172a;border:1px solid #334155;border-radius:8px;padding:3px 6px;">
+        <button class="btn btn-red" style="padding:4px 8px;font-size:11px;" onclick="adjustDays(${u.id},-1)">−</button>
+        <input id="adjDays_${u.id}" type="number" value="5" min="1" max="365"
+          style="width:44px;text-align:center;background:#1e293b;border:none;color:white;font-size:12px;font-weight:700;border-radius:4px;padding:3px 2px;"
+          onclick="event.stopPropagation()">
+        <button class="btn btn-green" style="padding:4px 8px;font-size:11px;" onclick="adjustDays(${u.id},1)">+</button>
+      </span>`;
   }
   if(hasDevice) {
     actionBtns += `<button class="btn btn-gray" onclick="doAction('reset-device',${u.id},this)" title="Device unlink karein">📱 Reset Device</button>`;
@@ -338,7 +340,6 @@ async function doAction(action, userId, btn) {
     unapprove:      `/admin/unapprove/${userId}`,
     delete:         `/admin/delete-user/${userId}`,
     'reset-device': `/admin/reset-device/${userId}`,
-    extend:         `/admin/extend-access/${userId}`,
   };
 
   try {
@@ -382,8 +383,34 @@ function updateUserInData(userId, action) {
     ALL_USERS[idx].device_id = null;
   } else if(action === 'reset-device') {
     ALL_USERS[idx].device_id = null;
-  } else if(action === 'extend') {
-    ALL_USERS[idx].unlocked_at = new Date().toISOString().replace('T',' ').substring(0,19);
+  }
+}
+
+async function adjustDays(userId, sign) {
+  const input = document.getElementById('adjDays_' + userId);
+  const days = parseInt(input.value);
+  if (!days || days < 1) { alert('Valid number likho (1-365)'); return; }
+  const finalDays = sign * days;
+
+  const body = new FormData();
+  body.append('days', finalDays);
+  try {
+    const res = await fetch(`/admin/adjust-days/${userId}`, { method:'POST', body, headers:{'X-Requested-With':'XMLHttpRequest'} });
+    const data = await res.json();
+    if(data.ok) {
+      // Update days_remaining in local data directly from server response
+      const idx = ALL_USERS.findIndex(u => u.id === userId);
+      if(idx !== -1) {
+        ALL_USERS[idx].days_remaining = data.days_remaining;
+        ALL_USERS[idx].unlocked = 1;
+      }
+      showMsg(userId, data.msg, 'ok');
+      setTimeout(() => rebuildAllTabs(), 600);
+    } else {
+      showMsg(userId, data.msg || 'Error', 'err');
+    }
+  } catch(e) {
+    showMsg(userId, 'Network error', 'err');
   }
 }
 
