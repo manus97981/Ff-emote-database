@@ -49,10 +49,16 @@ body { font-family:'Inter',sans-serif; background:#0b1120; min-height:100vh; dis
 .modal-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:1000; justify-content:center; align-items:center; }
 .modal-overlay.active { display:flex; }
 .modal-box { background:#1e293b; border-radius:18px; padding:20px; max-width:380px; width:90%; text-align:center; border:1px solid #334155; }
-.modal-box iframe { width:100%; height:200px; border-radius:10px; border:none; margin-bottom:12px; }
+.modal-box iframe { width:100%; height:200px; border-radius:10px; border:none; margin-bottom:12px; display:none; }
 .modal-box .modal-title { font-size:14px; color:#94a3b8; margin-bottom:14px; }
 .modal-close { background:#dc2626; color:white; border:none; padding:8px 22px; border-radius:8px; cursor:pointer; font-size:14px; font-weight:600; }
 .modal-close:hover { background:#b91c1c; }
+/* Thumbnail play button */
+.video-thumb { position:relative; width:100%; height:200px; border-radius:10px; overflow:hidden; margin-bottom:12px; background:#000; cursor:pointer; }
+.video-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.video-thumb .play-btn { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:60px; height:60px; background:rgba(220,38,38,0.9); border-radius:50%; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+.video-thumb .play-btn::after { content:''; border-style:solid; border-width:10px 0 10px 20px; border-color:transparent transparent transparent white; margin-left:4px; }
+.video-thumb .tap-hint { position:absolute; bottom:8px; left:0; right:0; font-size:11px; color:rgba(255,255,255,0.8); }
 </style>
 </head>
 <body>
@@ -123,6 +129,13 @@ body { font-family:'Inter',sans-serif; background:#0b1120; min-height:100vh; dis
 <!-- How To Use Video Popup -->
 <div class="modal-overlay" id="howToModal">
   <div class="modal-box">
+    <!-- Thumbnail shown first; tapping it loads the real iframe (bypasses mobile autoplay block) -->
+    <div class="video-thumb" id="howToThumb" onclick="loadHowToVideo()">
+      <img src="https://cf-images.us-east-1.prod.boltdns.net/v1/static/placeholder/16x9.jpg"
+           onerror="this.style.background='#0f172a';this.style.display='block';" alt="Video thumbnail">
+      <div class="play-btn"></div>
+      <span class="tap-hint">▶ Tap to play video</span>
+    </div>
     <iframe id="howToFrame" src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
     <div class="modal-title">How To Use — Istamal Karna Ka Tarika</div>
     <button class="modal-close" onclick="closeVideoModal('how-to')">Close ✕</button>
@@ -217,17 +230,32 @@ async function doRegister() {
   }
 }
 
-// Video modals — using /e/ embed URL so only the video player loads
+// Video modal — open shows thumbnail first, user taps thumbnail to load real iframe
+// This bypasses mobile Chrome/Samsung autoplay block (iframe must be triggered by direct tap)
 function openVideoModal(type) {
   if(type === 'how-to') {
-    document.getElementById('howToFrame').src = 'https://streamable.com/e/s0zv09';
+    // Reset to thumbnail state every time modal opens
+    document.getElementById('howToFrame').src = '';
+    document.getElementById('howToFrame').style.display = 'none';
+    document.getElementById('howToThumb').style.display = 'block';
     document.getElementById('howToModal').classList.add('active');
   }
 }
 
+function loadHowToVideo() {
+  // User tapped directly on thumbnail — this counts as a real user gesture
+  // so mobile browsers allow the iframe to autoplay
+  document.getElementById('howToThumb').style.display = 'none';
+  const frame = document.getElementById('howToFrame');
+  frame.style.display = 'block';
+  frame.src = 'https://streamable.com/e/s0zv09?autoplay=1';
+}
+
 function closeVideoModal(type) {
-  document.getElementById('howToFrame').src = '';
   document.getElementById('howToModal').classList.remove('active');
+  document.getElementById('howToFrame').src = '';
+  document.getElementById('howToFrame').style.display = 'none';
+  document.getElementById('howToThumb').style.display = 'block';
 }
 
 document.getElementById('howToModal').addEventListener('click', e => {
