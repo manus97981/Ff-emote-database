@@ -479,20 +479,26 @@ function toggleSS(id, btn) {
     el.style.display = 'none'; btn.textContent = '📸 Payment Screenshot';
   } else {
     el.style.display = 'block'; btn.textContent = '🙈 Hide Screenshot';
-    // Load image on first click (avoids lazy-load inside hidden container bug)
     const img = document.getElementById('ssimg_' + id);
     const loader = document.getElementById('ssload_' + id);
+    // Use fetch with credentials so session cookie is sent properly
     if(img && !img.dataset.loaded) {
       img.dataset.loaded = '1';
-      img.src = img.dataset.src;
-      img.onload = () => {
-        img.style.display = 'block';
-        if(loader) loader.style.display = 'none';
-      };
-      img.onerror = () => {
-        img.dataset.loaded = '';  // allow retry
-        if(loader) loader.textContent = '❌ Screenshot load nahi hua. Refresh karein.';
-      };
+      fetch(img.dataset.src, {credentials: 'same-origin'})
+        .then(function(res) {
+          if(!res.ok) throw new Error('HTTP ' + res.status);
+          return res.blob();
+        })
+        .then(function(blob) {
+          const url = URL.createObjectURL(blob);
+          img.src = url;
+          img.style.display = 'block';
+          if(loader) loader.style.display = 'none';
+        })
+        .catch(function(err) {
+          img.dataset.loaded = '';
+          if(loader) loader.textContent = '❌ Screenshot load nahi hua. (' + err.message + ')';
+        });
     }
   }
 }
