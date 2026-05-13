@@ -482,7 +482,8 @@ function toggleSS(id, btn) {
     // Load image on first click (avoids lazy-load inside hidden container bug)
     const img = document.getElementById('ssimg_' + id);
     const loader = document.getElementById('ssload_' + id);
-    if(img && !img.src) {
+    if(img && !img.dataset.loaded) {
+      img.dataset.loaded = '1';
       img.src = img.dataset.src;
       img.onload = () => {
         img.style.display = 'block';
