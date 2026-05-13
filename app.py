@@ -37,6 +37,8 @@ def get_db():
         autocommit=False
     )
 
+UNLOCK_EXPIRY_DAYS = 30  # Access expires after this many days
+
 def init_db():
     conn = get_db()
     with conn.cursor() as cur:
@@ -51,7 +53,8 @@ def init_db():
             screenshot MEDIUMTEXT DEFAULT NULL,
             screenshot_mime VARCHAR(50) DEFAULT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            unlocked_at DATETIME DEFAULT NULL
+            unlocked_at DATETIME DEFAULT NULL,
+            device_id VARCHAR(255) DEFAULT NULL
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4''')
         # Add new columns if upgrading from old schema
         try:
@@ -62,8 +65,35 @@ def init_db():
             cur.execute("ALTER TABLE users MODIFY COLUMN screenshot MEDIUMTEXT DEFAULT NULL")
         except:
             pass
+        try:
+            cur.execute("ALTER TABLE users ADD COLUMN device_id VARCHAR(255) DEFAULT NULL")
+        except:
+            pass
     conn.commit()
     conn.close()
+
+def is_access_expired(user):
+    """Returns True if user's unlocked access has expired (> UNLOCK_EXPIRY_DAYS since unlocked_at)."""
+    if not user.get("unlocked"):
+        return False
+    if not user.get("unlocked_at"):
+        return False
+    unlocked_at = user["unlocked_at"]
+    if isinstance(unlocked_at, str):
+        unlocked_at = datetime.datetime.strptime(unlocked_at, '%Y-%m-%d %H:%M:%S')
+    expiry = unlocked_at + datetime.timedelta(days=UNLOCK_EXPIRY_DAYS)
+    return datetime.datetime.utcnow() > expiry
+
+def days_remaining(user):
+    """Returns number of days remaining, or None if not applicable."""
+    if not user.get("unlocked") or not user.get("unlocked_at"):
+        return None
+    unlocked_at = user["unlocked_at"]
+    if isinstance(unlocked_at, str):
+        unlocked_at = datetime.datetime.strptime(unlocked_at, '%Y-%m-%d %H:%M:%S')
+    expiry = unlocked_at + datetime.timedelta(days=UNLOCK_EXPIRY_DAYS)
+    remaining = (expiry - datetime.datetime.utcnow()).days
+    return max(0, remaining)
 
 init_db()
 
@@ -80,7 +110,7 @@ def verify_token(token):
 def get_user(email):
     conn = get_db()
     with conn.cursor() as cur:
-        cur.execute("SELECT id,username,email,password_hash,unlocked,pending_payment,created_at,unlocked_at FROM users WHERE email=%s", (email,))
+        cur.execute("SELECT id,username,email,password_hash,unlocked,pending_payment,created_at,unlocked_at,device_id FROM users WHERE email=%s", (email,))
         u = cur.fetchone()
     conn.close()
     return u if u else None
@@ -89,7 +119,7 @@ def get_all_users():
     conn = get_db()
     with conn.cursor() as cur:
         # Don't fetch screenshot blob in list — fetch separately when needed
-        cur.execute("SELECT id,username,email,unlocked,pending_payment,created_at,unlocked_at, CASE WHEN screenshot IS NOT NULL THEN 1 ELSE 0 END as has_screenshot, screenshot_mime FROM users ORDER BY created_at DESC")
+        cur.execute("SELECT id,username,email,unlocked,pending_payment,created_at,unlocked_at,device_id, CASE WHEN screenshot IS NOT NULL THEN 1 ELSE 0 END as has_screenshot, screenshot_mime FROM users ORDER BY created_at DESC")
         users = cur.fetchall()
     conn.close()
     return list(users)
@@ -208,7 +238,24 @@ def admin_delete_user(user_id):
     conn.commit(); conn.close()
     return jsonify({"ok":True, "msg":"🗑️ Deleted"}) if is_ajax() else redirect("/admin")
 
-@app.route("/admin/edit-user/<int:user_id>", methods=["POST"])
+@app.route("/admin/reset-device/<int:user_id>", methods=["POST"])
+def admin_reset_device(user_id):
+    if not session.get("admin"): return (jsonify({"ok":False}), 403) if is_ajax() else redirect("/admin")
+    conn = get_db()
+    with conn.cursor() as cur:
+        cur.execute("UPDATE users SET device_id=NULL WHERE id=%s", (user_id,))
+    conn.commit(); conn.close()
+    return jsonify({"ok":True, "msg":"📱 Device reset ho gaya"}) if is_ajax() else redirect("/admin")
+
+@app.route("/admin/extend-access/<int:user_id>", methods=["POST"])
+def admin_extend_access(user_id):
+    if not session.get("admin"): return (jsonify({"ok":False}), 403) if is_ajax() else redirect("/admin")
+    conn = get_db()
+    with conn.cursor() as cur:
+        cur.execute("UPDATE users SET unlocked=1, unlocked_at=%s WHERE id=%s",
+                    (datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'), user_id))
+    conn.commit(); conn.close()
+    return jsonify({"ok":True, "msg":"🔄 Access 30 din ke liye extend ho gaya"}) if is_ajax() else redirect("/admin")
 def admin_edit_user(user_id):
     if not session.get("admin"): return (jsonify({"ok":False}), 403) if is_ajax() else redirect("/admin")
     username = request.form.get("username","").strip()
@@ -332,7 +379,15 @@ def api_logout():
 @app.route("/api/auth/me")
 @api_login_required
 def api_me(user):
-    return jsonify({"username":user["username"],"email":user["email"],"unlocked":bool(user["unlocked"])}), 200
+    expired = is_access_expired(user)
+    remaining = days_remaining(user)
+    return jsonify({
+        "username": user["username"],
+        "email": user["email"],
+        "unlocked": bool(user["unlocked"]) and not expired,
+        "days_remaining": remaining,
+        "expired": expired
+    }), 200
 
 @app.route("/api/upload-screenshot", methods=["POST"])
 @api_login_required
@@ -363,6 +418,28 @@ def send():
     user = get_user(verify_token(token))
     if not user or not user["unlocked"]:
         return jsonify({"status":"unlock_required"}), 403
+
+    # --- Expiry check ---
+    if is_access_expired(user):
+        # Auto-lock the user in DB
+        conn = get_db()
+        with conn.cursor() as cur:
+            cur.execute("UPDATE users SET unlocked=0, unlocked_at=NULL, device_id=NULL WHERE id=%s", (user["id"],))
+        conn.commit(); conn.close()
+        return jsonify({"status":"expired", "msg":"Aapki 30-din ki access khatam ho gayi. Please admin se dobara unlock karwayein."}), 403
+
+    # --- Device binding ---
+    incoming_device = request.form.get("device_id", "").strip()
+    if incoming_device:
+        if not user["device_id"]:
+            # First use — bind this device
+            conn = get_db()
+            with conn.cursor() as cur:
+                cur.execute("UPDATE users SET device_id=%s WHERE id=%s", (incoming_device, user["id"]))
+            conn.commit(); conn.close()
+        elif user["device_id"] != incoming_device:
+            return jsonify({"status":"device_mismatch", "msg":"Ye account dusre device pe linked hai. Admin se reset karwayein."}), 403
+
     uid = request.form.get("uid")
     team = request.form.get("team")
     emote = str(request.form.get("emote")).strip()
