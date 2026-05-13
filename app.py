@@ -168,53 +168,56 @@ def admin():
     users = get_all_users()
     return render_template("admin.html", uids=list(blocked_uids), users=users)
 
+def is_ajax():
+    return request.headers.get("X-Requested-With") == "XMLHttpRequest"
+
 @app.route("/admin/approve/<int:user_id>", methods=["POST"])
 def admin_approve(user_id):
-    if not session.get("admin"): return redirect("/admin")
+    if not session.get("admin"): return (jsonify({"ok":False}), 403) if is_ajax() else redirect("/admin")
     conn = get_db()
     with conn.cursor() as cur:
-        cur.execute("UPDATE users SET unlocked=1, pending_payment=0, unlocked_at=%s WHERE id=%s",
+        cur.execute("UPDATE users SET unlocked=1, pending_payment=0, screenshot=NULL, screenshot_mime=NULL, unlocked_at=%s WHERE id=%s",
                     (datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'), user_id))
     conn.commit(); conn.close()
-    return redirect("/admin")
+    return jsonify({"ok":True, "msg":"✅ Approved"}) if is_ajax() else redirect("/admin")
 
 @app.route("/admin/unapprove/<int:user_id>", methods=["POST"])
 def admin_unapprove(user_id):
-    if not session.get("admin"): return redirect("/admin")
+    if not session.get("admin"): return (jsonify({"ok":False}), 403) if is_ajax() else redirect("/admin")
     conn = get_db()
     with conn.cursor() as cur:
         cur.execute("UPDATE users SET unlocked=0, unlocked_at=NULL WHERE id=%s", (user_id,))
     conn.commit(); conn.close()
-    return redirect("/admin")
+    return jsonify({"ok":True, "msg":"🔒 Unapproved"}) if is_ajax() else redirect("/admin")
 
 @app.route("/admin/reject/<int:user_id>", methods=["POST"])
 def admin_reject(user_id):
-    if not session.get("admin"): return redirect("/admin")
+    if not session.get("admin"): return (jsonify({"ok":False}), 403) if is_ajax() else redirect("/admin")
     conn = get_db()
     with conn.cursor() as cur:
         cur.execute("UPDATE users SET pending_payment=0, screenshot=NULL, screenshot_mime=NULL WHERE id=%s", (user_id,))
     conn.commit(); conn.close()
-    return redirect("/admin")
+    return jsonify({"ok":True, "msg":"❌ Rejected"}) if is_ajax() else redirect("/admin")
 
 @app.route("/admin/delete-user/<int:user_id>", methods=["POST"])
 def admin_delete_user(user_id):
-    if not session.get("admin"): return redirect("/admin")
+    if not session.get("admin"): return (jsonify({"ok":False}), 403) if is_ajax() else redirect("/admin")
     conn = get_db()
     with conn.cursor() as cur:
         cur.execute("DELETE FROM users WHERE id=%s", (user_id,))
     conn.commit(); conn.close()
-    return redirect("/admin")
+    return jsonify({"ok":True, "msg":"🗑️ Deleted"}) if is_ajax() else redirect("/admin")
 
 @app.route("/admin/edit-user/<int:user_id>", methods=["POST"])
 def admin_edit_user(user_id):
-    if not session.get("admin"): return redirect("/admin")
+    if not session.get("admin"): return (jsonify({"ok":False}), 403) if is_ajax() else redirect("/admin")
     username = request.form.get("username","").strip()
     unlocked = 1 if request.form.get("unlocked") == "1" else 0
     conn = get_db()
     with conn.cursor() as cur:
         cur.execute("UPDATE users SET username=%s, unlocked=%s WHERE id=%s", (username, unlocked, user_id))
     conn.commit(); conn.close()
-    return redirect("/admin")
+    return jsonify({"ok":True}) if is_ajax() else redirect("/admin")
 
 # Serve screenshot from DB (base64 decoded back to image)
 @app.route("/screenshots/<int:user_id>")
