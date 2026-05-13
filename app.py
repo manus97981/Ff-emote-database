@@ -157,7 +157,7 @@ def logout():
 @app.route("/admin", methods=["GET","POST"])
 def admin():
     if request.method == "POST":
-        if request.form.get("password") == "pak112233":
+        if request.form.get("password") == "Sha@Sha@3738":
             session["admin"] = True; return redirect("/admin")
         return "Wrong Password"
     if not session.get("admin"):
