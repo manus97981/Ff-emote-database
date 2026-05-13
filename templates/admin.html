@@ -479,6 +479,7 @@ function toggleSS(id, btn) {
     el.style.display = 'none'; btn.textContent = '📸 Payment Screenshot';
   } else {
     el.style.display = 'block'; btn.textContent = '🙈 Hide Screenshot';
+    // Load image on first click (avoids lazy-load inside hidden container bug)
     const img = document.getElementById('ssimg_' + id);
     const loader = document.getElementById('ssload_' + id);
     if(img && !img.dataset.loaded) {
@@ -489,12 +490,9 @@ function toggleSS(id, btn) {
         if(loader) loader.style.display = 'none';
       };
       img.onerror = () => {
+        img.dataset.loaded = '';  // allow retry
         if(loader) loader.textContent = '❌ Screenshot load nahi hua. Refresh karein.';
       };
-    } else if(img && img.dataset.loaded) {
-      // Already loaded before — just make sure it's visible
-      img.style.display = 'block';
-      if(loader) loader.style.display = 'none';
     }
   }
 }
