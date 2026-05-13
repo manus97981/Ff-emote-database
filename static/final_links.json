@@ -1,0 +1,1797 @@
+[
+  {
+    "name": "Cobra Rising",
+    "id": "909000075",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000075.png"
+  },
+  {
+    "name": "LOL",
+    "id": "909000002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000002.png"
+  },
+  {
+    "name": "Pirate's Flag",
+    "id": "909000034",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000034.png"
+  },
+  {
+    "name": "\"\"\"100\"\" Gloo Sculpture\"",
+    "id": "909042007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909042007.png"
+  },
+  {
+    "name": "AN94 Max",
+    "id": "909035012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909035012.png"
+  },
+  {
+    "name": "Scar Max",
+    "id": "909000068",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000068.png"
+  },
+  {
+    "name": "XM8 Max",
+    "id": "909000085",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000085.png"
+  },
+  {
+    "name": "Ak Max",
+    "id": "909000063",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000063.png"
+  },
+  {
+    "name": "Shotgun Max",
+    "id": "909035007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909035007.png"
+  },
+  {
+    "name": "G18 Max",
+    "id": "909038012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909038012.png"
+  },
+  {
+    "name": "MP5 Max",
+    "id": "909033002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909033002.png"
+  },
+  {
+    "name": "N60 Max",
+    "id": "909051003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051003.png"
+  },
+  {
+    "name": "Fist Max",
+    "id": "909037011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909037011.png"
+  },
+  {
+    "name": "M10 Max",
+    "id": "909000081",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000081.png"
+  },
+  {
+    "name": "Famasa Max",
+    "id": "909000090",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000090.png"
+  },
+  {
+    "name": "P90 Max",
+    "id": "909049010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909049010.png"
+  },
+  {
+    "name": "Thompson Max",
+    "id": "909038010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909038010.png"
+  },
+  {
+    "name": "M4A1 Max",
+    "id": "909033001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909033001.png"
+  },
+  {
+    "name": "UMP Max",
+    "id": "909000098",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000098.png"
+  },
+  {
+    "name": "New M40 Max",
+    "id": "909040010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909040010.png"
+  },
+  {
+    "name": "Parafal Max",
+    "id": "909045001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909045001.png"
+  },
+  {
+    "name": "WD Picker Max",
+    "id": "909042008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909042008.png"
+  },
+  {
+    "name": "TV Time (new)",
+    "id": "909052001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052001.png"
+  },
+  {
+    "name": "Prismatic Flight (new)",
+    "id": "909051001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051001.png"
+  },
+  {
+    "name": "Shower Time (new)",
+    "id": "909051004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051004.png"
+  },
+  {
+    "name": "Boss Energy (new)",
+    "id": "909051005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051005.png"
+  },
+  {
+    "name": "Double Holster (new)",
+    "id": "909051006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051006.png"
+  },
+  {
+    "name": "Finger Guns (new)",
+    "id": "909051007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051007.png"
+  },
+  {
+    "name": "Shivering (new)",
+    "id": "909051008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051008.png"
+  },
+  {
+    "name": "Triple Shush (new)",
+    "id": "909051009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051009.png"
+  },
+  {
+    "name": "On Motorbike (new)",
+    "id": "909051010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051010.png"
+  },
+  {
+    "name": "Twisted Stare (new)",
+    "id": "909051011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051011.png"
+  },
+  {
+    "name": "Sculpted Stills",
+    "id": "909053010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909053010.png"
+  },
+  {
+    "name": "Multitasking",
+    "id": "909053011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909053011.png"
+  },
+  {
+    "name": "Itchy Nose",
+    "id": "909053012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909053012.png"
+  },
+  {
+    "name": "Reverse Penalty!",
+    "id": "909053013",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909053013.png"
+  },
+  {
+    "name": "Sweeten Up",
+    "id": "909053009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909053009.png"
+  },
+  {
+    "name": "VAR Review",
+    "id": "909053008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909053008.png"
+  },
+  {
+    "name": "Keepie Uppie",
+    "id": "909053007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909053007.png"
+  },
+  {
+    "name": "Winning Kick",
+    "id": "909053006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909053006.png"
+  },
+  {
+    "name": "Reverse Penalty!",
+    "id": "909053005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909053005.png"
+  },
+  {
+    "name": "Undersea Wriggle",
+    "id": "909053004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909053004.png"
+  },
+  {
+    "name": "Power of Eclipse",
+    "id": "909053003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909053003.png"
+  },
+  {
+    "name": "Victory Trumpet",
+    "id": "909053001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909053001.png"
+  },
+  {
+    "name": "Red Petals (new)",
+    "id": "909051013",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051013.png"
+  },
+  {
+    "name": "Puffer Ride (new)",
+    "id": "909051014",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051014.png"
+  },
+  {
+    "name": "Can't Stop Laughing (new)",
+    "id": "909051015",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051015.png"
+  },
+  {
+    "name": "Crowned Glory Emote (new)",
+    "id": "909051016",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051016.png"
+  },
+  {
+    "name": "Choppy Co-op (new)",
+    "id": "909051017",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051017.png"
+  },
+  {
+    "name": "Passinho (new)",
+    "id": "909051021",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051021.png"
+  },
+  {
+    "name": "All Good, Boss! (new)",
+    "id": "909051022",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051022.png"
+  },
+  {
+    "name": "67 (new)",
+    "id": "909051023",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051023.png"
+  },
+  {
+    "name": "Cursed Technique Reversal: Red (new)",
+    "id": "909052002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052002.png"
+  },
+  {
+    "name": "Straw Doll Technique (new)",
+    "id": "909052003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052003.png"
+  },
+  {
+    "name": "Ten Shadows Technique: Totality (new)",
+    "id": "909052004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052004.png"
+  },
+  {
+    "name": "Catchy Melody (new)",
+    "id": "909052005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052005.png"
+  },
+  {
+    "name": "Farewell (new)",
+    "id": "909052006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052006.png"
+  },
+  {
+    "name": "Panther Move (new)",
+    "id": "909052007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052007.png"
+  },
+  {
+    "name": "Heart Attack! (new)",
+    "id": "909052008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052008.png"
+  },
+  {
+    "name": "Umbrella Go (new)",
+    "id": "909052009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052009.png"
+  },
+  {
+    "name": "T-pose (new)",
+    "id": "909052010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052010.png"
+  },
+  {
+    "name": "Laggy (new)",
+    "id": "909052011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052011.png"
+  },
+  {
+    "name": "Treasure Rain (new)",
+    "id": "909052012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052012.png"
+  },
+  {
+    "name": "King of Gold (new)",
+    "id": "909052013",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052013.png"
+  },
+  {
+    "name": "King of Gold (new)",
+    "id": "909052014",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052014.png"
+  },
+  {
+    "name": "King of Gold (new)",
+    "id": "909052015",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052015.png"
+  },
+  {
+    "name": "King of Gold (new)",
+    "id": "909052016",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052016.png"
+  },
+  {
+    "name": "Raise Your Thumb! (new)",
+    "id": "909052019",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909052019.png"
+  },
+  {
+    "name": "Open Fire",
+    "id": "909049012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909049012.png"
+  },
+  {
+    "name": "\"\"\"100\"\" Gloo Sculpture\"",
+    "id": "909042007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909042007.png"
+  },
+  {
+    "name": "909000019",
+    "id": "909000019",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000019.png"
+  },
+  {
+    "name": "909000020",
+    "id": "909000020",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000020.png"
+  },
+  {
+    "name": "LOL",
+    "id": "909000002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000002.png"
+  },
+  {
+    "name": "Provoke",
+    "id": "909000003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000003.png"
+  },
+  {
+    "name": "Flowers of Love",
+    "id": "909000010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000010.png"
+  },
+  {
+    "name": "FFWC Throne",
+    "id": "909000014",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000014.png"
+  },
+  {
+    "name": "Selfie",
+    "id": "909000032",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000032.png"
+  },
+  {
+    "name": "Pirate's Flag",
+    "id": "909000034",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000034.png"
+  },
+  {
+    "name": "Top DJ",
+    "id": "909000036",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000036.png"
+  },
+  {
+    "name": "Power of money",
+    "id": "909000038",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000038.png"
+  },
+  {
+    "name": "Eat my dust",
+    "id": "909000039",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000039.png"
+  },
+  {
+    "name": "Kongfu",
+    "id": "909000041",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000041.png"
+  },
+  {
+    "name": "I heart you",
+    "id": "909000045",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000045.png"
+  },
+  {
+    "name": "Tea Time",
+    "id": "909000046",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000046.png"
+  },
+  {
+    "name": "Doggie",
+    "id": "909000052",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000052.png"
+  },
+  {
+    "name": "I'm Rich!",
+    "id": "909000055",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000055.png"
+  },
+  {
+    "name": "Make It Rain",
+    "id": "909000056",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000056.png"
+  },
+  {
+    "name": "Dust Off",
+    "id": "909000057",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000057.png"
+  },
+  {
+    "name": "Captain Booyah",
+    "id": "909000058",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000058.png"
+  },
+  {
+    "name": "BOOYAH!",
+    "id": "909000060",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000060.png"
+  },
+  {
+    "name": "Bhangra",
+    "id": "909000061",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000061.png"
+  },
+  {
+    "name": "Piece of Cake",
+    "id": "909000062",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000062.png"
+  },
+  {
+    "name": "I'm Saitama!",
+    "id": "909000064",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000064.png"
+  },
+  {
+    "name": "The Victor",
+    "id": "909000065",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000065.png"
+  },
+  {
+    "name": "Sii!",
+    "id": "909000066",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000066.png"
+  },
+  {
+    "name": "Obliteration",
+    "id": "909000067",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000067.png"
+  },
+  {
+    "name": "Top Scorer",
+    "id": "909000069",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000069.png"
+  },
+  {
+    "name": "Triple Kicks",
+    "id": "909000070",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000070.png"
+  },
+  {
+    "name": "Cobra Dance",
+    "id": "909000071",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000071.png"
+  },
+  {
+    "name": "Predator Pulse",
+    "id": "909000072",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000072.png"
+  },
+  {
+    "name": "Ground Punch",
+    "id": "909000073",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000073.png"
+  },
+  {
+    "name": "The Biker",
+    "id": "909000074",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000074.png"
+  },
+  {
+    "name": "One-Finger Pushup",
+    "id": "909000076",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000076.png"
+  },
+  {
+    "name": "Stage Time",
+    "id": "909000077",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000077.png"
+  },
+  {
+    "name": "Booyah! Balloon",
+    "id": "909000078",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000078.png"
+  },
+  {
+    "name": "More Practice",
+    "id": "909000079",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000079.png"
+  },
+  {
+    "name": "FFWS 2021",
+    "id": "909000080",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000080.png"
+  },
+  {
+    "name": "Mythos Four",
+    "id": "909000086",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000086.png"
+  },
+  {
+    "name": "Champion Grab",
+    "id": "909000087",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000087.png"
+  },
+  {
+    "name": "Win and Chill",
+    "id": "909000088",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000088.png"
+  },
+  {
+    "name": "Hadouken",
+    "id": "909000089",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000089.png"
+  },
+  {
+    "name": "Big Smash",
+    "id": "909000091",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000091.png"
+  },
+  {
+    "name": "All In Control",
+    "id": "909000093",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000093.png"
+  },
+  {
+    "name": "Debugging",
+    "id": "909000094",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000094.png"
+  },
+  {
+    "name": "Waggor Wave",
+    "id": "909000095",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000095.png"
+  },
+  {
+    "name": "Crazy Guitar",
+    "id": "909000096",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000096.png"
+  },
+  {
+    "name": "Dribble King",
+    "id": "909000121",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000121.png"
+  },
+  {
+    "name": "Name Not Found",
+    "id": "909000122",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000122.png"
+  },
+  {
+    "name": "Mind it!",
+    "id": "909000123",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000123.png"
+  },
+  {
+    "name": "Golden Combo",
+    "id": "909000124",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000124.png"
+  },
+  {
+    "name": "Sick Moves",
+    "id": "909000125",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000125.png"
+  },
+  {
+    "name": "Ruler's Flag",
+    "id": "909000128",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000128.png"
+  },
+  {
+    "name": "Money Throw",
+    "id": "909000129",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000129.png"
+  },
+  {
+    "name": "Endless Bullets",
+    "id": "909000130",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000130.png"
+  },
+  {
+    "name": "Fire Slam",
+    "id": "909000133",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000133.png"
+  },
+  {
+    "name": "Heartbroken",
+    "id": "909000134",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000134.png"
+  },
+  {
+    "name": "Rock Paper Scissors",
+    "id": "909000135",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000135.png"
+  },
+  {
+    "name": "Shattered Reality",
+    "id": "909000136",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000136.png"
+  },
+  {
+    "name": "Halo of Music",
+    "id": "909000137",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000137.png"
+  },
+  {
+    "name": "Burnt BBQ",
+    "id": "909000138",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000138.png"
+  },
+  {
+    "name": "Switching Steps",
+    "id": "909000139",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000139.png"
+  },
+  {
+    "name": "Creed Slay",
+    "id": "909000140",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000140.png"
+  },
+  {
+    "name": "Leap of Fail",
+    "id": "909000141",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000141.png"
+  },
+  {
+    "name": "Name Not Found",
+    "id": "909000142",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000142.png"
+  },
+  {
+    "name": "Helicopter Shot",
+    "id": "909000143",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000143.png"
+  },
+  {
+    "name": "Kungfu Tigers",
+    "id": "909000144",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000144.png"
+  },
+  {
+    "name": "Possessed Warrior",
+    "id": "909000145",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909000145.png"
+  },
+  {
+    "name": "Drop Kick",
+    "id": "909033004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909033004.png"
+  },
+  {
+    "name": "Sit Down!",
+    "id": "909033005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909033005.png"
+  },
+  {
+    "name": "BOOYAH Sparks",
+    "id": "909033006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909033006.png"
+  },
+  {
+    "name": "The FFWS Dance",
+    "id": "909033007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909033007.png"
+  },
+  {
+    "name": "Easy Peasy",
+    "id": "909033008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909033008.png"
+  },
+  {
+    "name": "Winner Throw",
+    "id": "909033009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909033009.png"
+  },
+  {
+    "name": "Weight of Victory",
+    "id": "909033010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909033010.png"
+  },
+  {
+    "name": "Chronicle of the Sword",
+    "id": "909034001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909034001.png"
+  },
+  {
+    "name": "The Collapse",
+    "id": "909034002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909034002.png"
+  },
+  {
+    "name": "Flaming Groove",
+    "id": "909034003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909034003.png"
+  },
+  {
+    "name": "Energetic",
+    "id": "909034004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909034004.png"
+  },
+  {
+    "name": "Ridicule",
+    "id": "909034005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909034005.png"
+  },
+  {
+    "name": "Tease Waggor",
+    "id": "909034006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909034006.png"
+  },
+  {
+    "name": "Great Conductor",
+    "id": "909034007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909034007.png"
+  },
+  {
+    "name": "Fake Death",
+    "id": "909034008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909034008.png"
+  },
+  {
+    "name": "Twerk",
+    "id": "909034009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909034009.png"
+  },
+  {
+    "name": "BR-Ranked Heroic Emote",
+    "id": "909034010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909034010.png"
+  },
+  {
+    "name": "BR-Ranked Master Emote",
+    "id": "909034011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909034011.png"
+  },
+  {
+    "name": "CS-Ranked Heroic Emote",
+    "id": "909034012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909034012.png"
+  },
+  {
+    "name": "CS-Ranked Master Emote",
+    "id": "909034013",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909034013.png"
+  },
+  {
+    "name": "Yes, I do",
+    "id": "909034014",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909034014.png"
+  },
+  {
+    "name": "Free Money!",
+    "id": "909035001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909035001.png"
+  },
+  {
+    "name": "Victorious Eagle",
+    "id": "909035005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909035005.png"
+  },
+  {
+    "name": "Flying Saucer",
+    "id": "909035006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909035006.png"
+  },
+  {
+    "name": "Bobble Dance",
+    "id": "909035008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909035008.png"
+  },
+  {
+    "name": "Weight Training",
+    "id": "909035009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909035009.png"
+  },
+  {
+    "name": "Beautiful Love",
+    "id": "909035010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909035010.png"
+  },
+  {
+    "name": "Groove Moves",
+    "id": "909035011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909035011.png"
+  },
+  {
+    "name": "Louder Please",
+    "id": "909035013",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909035013.png"
+  },
+  {
+    "name": "Ninja Stand",
+    "id": "909035014",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909035014.png"
+  },
+  {
+    "name": "Creator In Action",
+    "id": "909035015",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909035015.png"
+  },
+  {
+    "name": "Ghost Float",
+    "id": "909036001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909036001.png"
+  },
+  {
+    "name": "Shiba Surf",
+    "id": "909036002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909036002.png"
+  },
+  {
+    "name": "Waiter Walk",
+    "id": "909036003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909036003.png"
+  },
+  {
+    "name": "Graffiti Cameraman",
+    "id": "909036004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909036004.png"
+  },
+  {
+    "name": "Agile Boxer",
+    "id": "909036005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909036005.png"
+  },
+  {
+    "name": "Sunbathing",
+    "id": "909036006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909036006.png"
+  },
+  {
+    "name": "Skateboard Swag",
+    "id": "909036008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909036008.png"
+  },
+  {
+    "name": "Phantom Tamer",
+    "id": "909036009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909036009.png"
+  },
+  {
+    "name": "The Signal",
+    "id": "909036010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909036010.png"
+  },
+  {
+    "name": "Eternal Descent",
+    "id": "909036011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909036011.png"
+  },
+  {
+    "name": "Swaggy Dance",
+    "id": "909036012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909036012.png"
+  },
+  {
+    "name": "Admire",
+    "id": "909036014",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909036014.png"
+  },
+  {
+    "name": "Reindeer Float",
+    "id": "909037001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909037001.png"
+  },
+  {
+    "name": "Bamboo Dance",
+    "id": "909037002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909037002.png"
+  },
+  {
+    "name": "Dance of Constellation",
+    "id": "909037003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909037003.png"
+  },
+  {
+    "name": "Trophy Grab",
+    "id": "909037004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909037004.png"
+  },
+  {
+    "name": "Starry Hands",
+    "id": "909037005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909037005.png"
+  },
+  {
+    "name": "Yum",
+    "id": "909037006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909037006.png"
+  },
+  {
+    "name": "Happy Dancing",
+    "id": "909037007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909037007.png"
+  },
+  {
+    "name": "Juggle",
+    "id": "909037008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909037008.png"
+  },
+  {
+    "name": "Neon Sign",
+    "id": "909037009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909037009.png"
+  },
+  {
+    "name": "Beast Tease",
+    "id": "909037010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909037010.png"
+  },
+  {
+    "name": "Clap Dance",
+    "id": "909037012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909037012.png"
+  },
+  {
+    "name": "The Influencer",
+    "id": "909038001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909038001.png"
+  },
+  {
+    "name": "Name Not Found",
+    "id": "909038002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909038002.png"
+  },
+  {
+    "name": "Techno Blast",
+    "id": "909038003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909038003.png"
+  },
+  {
+    "name": "Be My Valentine",
+    "id": "909038004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909038004.png"
+  },
+  {
+    "name": "Angry Walk",
+    "id": "909038005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909038005.png"
+  },
+  {
+    "name": "Make Some Noise",
+    "id": "909038006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909038006.png"
+  },
+  {
+    "name": "Croco Hooray",
+    "id": "909038008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909038008.png"
+  },
+  {
+    "name": "Scorpio Spin",
+    "id": "909038009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909038009.png"
+  },
+  {
+    "name": "Shall We Dance?",
+    "id": "909038011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909038011.png"
+  },
+  {
+    "name": "Spin Master",
+    "id": "909038013",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909038013.png"
+  },
+  {
+    "name": "Festival Celebration",
+    "id": "909039001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909039001.png"
+  },
+  {
+    "name": "Artistic Musical Dance",
+    "id": "909039002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909039002.png"
+  },
+  {
+    "name": "Forward, Backward",
+    "id": "909039003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909039003.png"
+  },
+  {
+    "name": "Scorpion Friend",
+    "id": "909039004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909039004.png"
+  },
+  {
+    "name": "Aching Power",
+    "id": "909039005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909039005.png"
+  },
+  {
+    "name": "Earthly Force",
+    "id": "909039006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909039006.png"
+  },
+  {
+    "name": "Grenade Magic",
+    "id": "909039007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909039007.png"
+  },
+  {
+    "name": "Oh Yeah!",
+    "id": "909039008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909039008.png"
+  },
+  {
+    "name": "Grace On Wheels",
+    "id": "909039009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909039009.png"
+  },
+  {
+    "name": "Flex",
+    "id": "909039010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909039010.png"
+  },
+  {
+    "name": "Crimson Doom",
+    "id": "909039011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909039011.png"
+  },
+  {
+    "name": "Fire Beast Tamer",
+    "id": "909039012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909039012.png"
+  },
+  {
+    "name": "Crimson Tunes",
+    "id": "909039013",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909039013.png"
+  },
+  {
+    "name": "Swaggy V-Steps",
+    "id": "909039014",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909039014.png"
+  },
+  {
+    "name": "The Chromatic Finish",
+    "id": "909040001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909040001.png"
+  },
+  {
+    "name": "Smash the Feather",
+    "id": "909040002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909040002.png"
+  },
+  {
+    "name": "Sonorous Steps",
+    "id": "909040003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909040003.png"
+  },
+  {
+    "name": "Fishing for Wisdom",
+    "id": "909040004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909040004.png"
+  },
+  {
+    "name": "Chromatic Pop Dance",
+    "id": "909040005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909040005.png"
+  },
+  {
+    "name": "Chroma Twist Twist",
+    "id": "909040006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909040006.png"
+  },
+  {
+    "name": "Birth of Justice",
+    "id": "909040008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909040008.png"
+  },
+  {
+    "name": "Spider-Sense",
+    "id": "909040009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909040009.png"
+  },
+  {
+    "name": "Play With Thunderbolt",
+    "id": "909040011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909040011.png"
+  },
+  {
+    "name": "6th Anniversary Celebration",
+    "id": "909040012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909040012.png"
+  },
+  {
+    "name": "Wisdom Swing",
+    "id": "909040013",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909040013.png"
+  },
+  {
+    "name": "Helicopter Shot",
+    "id": "909040014",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909040014.png"
+  },
+  {
+    "name": "Thunder Breathing First Form: Thunder Flash",
+    "id": "909041001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909041001.png"
+  },
+  {
+    "name": "Water Breathing Sixth Form: Whirlpool",
+    "id": "909041002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909041002.png"
+  },
+  {
+    "name": "Beast Breathing Fifth Fang: Crazy Cutting",
+    "id": "909041003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909041003.png"
+  },
+  {
+    "name": "Flying Ink Sword",
+    "id": "909041004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909041004.png"
+  },
+  {
+    "name": "Diz My Popblaster",
+    "id": "909041005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909041005.png"
+  },
+  {
+    "name": "Dance Puppet, Dance!",
+    "id": "909041006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909041006.png"
+  },
+  {
+    "name": "High Knees",
+    "id": "909041007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909041007.png"
+  },
+  {
+    "name": "Bony Fumes",
+    "id": "909041008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909041008.png"
+  },
+  {
+    "name": "Feel the Electricity",
+    "id": "909041009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909041009.png"
+  },
+  {
+    "name": "Whac-A-Cotton",
+    "id": "909041010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909041010.png"
+  },
+  {
+    "name": "Honorable Mention Emote",
+    "id": "909041011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909041011.png"
+  },
+  {
+    "name": "BR-Ranked Grandmaster Emote",
+    "id": "909041012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909041012.png"
+  },
+  {
+    "name": "CS-Ranked Grandmaster Emote",
+    "id": "909041013",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909041013.png"
+  },
+  {
+    "name": "Monster Clubbing",
+    "id": "909041014",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909041014.png"
+  },
+  {
+    "name": "Basudara Dance",
+    "id": "909041015",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909041015.png"
+  },
+  {
+    "name": "Stir-Fry Frostfire",
+    "id": "909042001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909042001.png"
+  },
+  {
+    "name": "Money Rain",
+    "id": "909042002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909042002.png"
+  },
+  {
+    "name": "Frostfire's Calling",
+    "id": "909042003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909042003.png"
+  },
+  {
+    "name": "Stomping Foot",
+    "id": "909042004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909042004.png"
+  },
+  {
+    "name": "This Way",
+    "id": "909042005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909042005.png"
+  },
+  {
+    "name": "Excellent Service",
+    "id": "909042006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909042006.png"
+  },
+  {
+    "name": "Celebration Schuss",
+    "id": "909042009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909042009.png"
+  },
+  {
+    "name": "Dawn Voyage Emote",
+    "id": "909042011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909042011.png"
+  },
+  {
+    "name": "Lamborghini Ride",
+    "id": "909042012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909042012.png"
+  },
+  {
+    "name": "Hello! Frostfire Style",
+    "id": "909042013",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909042013.png"
+  },
+  {
+    "name": "Hand Grooves",
+    "id": "909042016",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909042016.png"
+  },
+  {
+    "name": "Free Fire Toiletman",
+    "id": "909042017",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909042017.png"
+  },
+  {
+    "name": "Kemusan",
+    "id": "909042018",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909042018.png"
+  },
+  {
+    "name": "Ribbit Rider",
+    "id": "909043001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909043001.png"
+  },
+  {
+    "name": "Inner Self Mastery",
+    "id": "909043002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909043002.png"
+  },
+  {
+    "name": "Emperor's Treasure Machine",
+    "id": "909043003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909043003.png"
+  },
+  {
+    "name": "Why So Chaos?",
+    "id": "909043004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909043004.png"
+  },
+  {
+    "name": "Huge Feast",
+    "id": "909043005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909043005.png"
+  },
+  {
+    "name": "Color Burst",
+    "id": "909043006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909043006.png"
+  },
+  {
+    "name": "Dragon Swipe",
+    "id": "909043007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909043007.png"
+  },
+  {
+    "name": "Samba",
+    "id": "909043008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909043008.png"
+  },
+  {
+    "name": "Speed Summon",
+    "id": "909043009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909043009.png"
+  },
+  {
+    "name": "What a Match",
+    "id": "909043010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909043010.png"
+  },
+  {
+    "name": "What a Pair",
+    "id": "909043013",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909043013.png"
+  },
+  {
+    "name": "Byte Mounting",
+    "id": "909044001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909044001.png"
+  },
+  {
+    "name": "The Unicyclist",
+    "id": "909044002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909044002.png"
+  },
+  {
+    "name": "Basket Rafting",
+    "id": "909044003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909044003.png"
+  },
+  {
+    "name": "Happy Lamb Shouldering",
+    "id": "909044004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909044004.png"
+  },
+  {
+    "name": "Paradox of Enlightenment",
+    "id": "909044005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909044005.png"
+  },
+  {
+    "name": "Harmonious Paradox",
+    "id": "909044006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909044006.png"
+  },
+  {
+    "name": "Raise Your Thumb!",
+    "id": "909044007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909044007.png"
+  },
+  {
+    "name": "The Final Paradox",
+    "id": "909044015",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909044015.png"
+  },
+  {
+    "name": "Honk Up!",
+    "id": "909044016",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909044016.png"
+  },
+  {
+    "name": "Spring Rocker",
+    "id": "909045002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909045002.png"
+  },
+  {
+    "name": "Giddy Up!",
+    "id": "909045003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909045003.png"
+  },
+  {
+    "name": "The Goosy Dance",
+    "id": "909045004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909045004.png"
+  },
+  {
+    "name": "Captain Victor",
+    "id": "909045005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909045005.png"
+  },
+  {
+    "name": "A Flower Salute",
+    "id": "909045010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909045010.png"
+  },
+  {
+    "name": "Little Foxy Run",
+    "id": "909045011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909045011.png"
+  },
+  {
+    "name": "Mr. Waggor's Seesaw",
+    "id": "909045012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909045012.png"
+  },
+  {
+    "name": "Floating Meditation",
+    "id": "909045015",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909045015.png"
+  },
+  {
+    "name": "Naatu Naatu",
+    "id": "909045016",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909045016.png"
+  },
+  {
+    "name": "Champion's Walk",
+    "id": "909045017",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909045017.png"
+  },
+  {
+    "name": "Aura Boarder",
+    "id": "909046001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046001.png"
+  },
+  {
+    "name": "Who's the Booyah Champ!",
+    "id": "909046002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046002.png"
+  },
+  {
+    "name": "Controlled Combustion",
+    "id": "909046003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046003.png"
+  },
+  {
+    "name": "Cheers to Victory!",
+    "id": "909046004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046004.png"
+  },
+  {
+    "name": "Shoe Shining",
+    "id": "909046005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046005.png"
+  },
+  {
+    "name": "Gunspinning",
+    "id": "909046006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046006.png"
+  },
+  {
+    "name": "Crowd Pleaser",
+    "id": "909046007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046007.png"
+  },
+  {
+    "name": "No Sweat",
+    "id": "909046008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046008.png"
+  },
+  {
+    "name": "Magma Quake",
+    "id": "909046009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046009.png"
+  },
+  {
+    "name": "Max Firepower",
+    "id": "909046010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046010.png"
+  },
+  {
+    "name": "Can't Touch This",
+    "id": "909046011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046011.png"
+  },
+  {
+    "name": "Firestarter",
+    "id": "909046012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046012.png"
+  },
+  {
+    "name": "FFWS Flag Flair",
+    "id": "909046013",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046013.png"
+  },
+  {
+    "name": "Beat Drop",
+    "id": "909046014",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046014.png"
+  },
+  {
+    "name": "Isagi's Spatial Awareness",
+    "id": "909046015",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046015.png"
+  },
+  {
+    "name": "Nagi's Trapping",
+    "id": "909046016",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046016.png"
+  },
+  {
+    "name": "Soaring Up",
+    "id": "909046017",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909046017.png"
+  },
+  {
+    "name": "I Won't Bow Down",
+    "id": "909047001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909047001.png"
+  },
+  {
+    "name": "Aurora Iridescence",
+    "id": "909047002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909047002.png"
+  },
+  {
+    "name": "Couch For Two",
+    "id": "909047003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909047003.png"
+  },
+  {
+    "name": "Flutter Dash",
+    "id": "909047004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909047004.png"
+  },
+  {
+    "name": "Slippery Throne",
+    "id": "909047005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909047005.png"
+  },
+  {
+    "name": "Acceptance Speech",
+    "id": "909047006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909047006.png"
+  },
+  {
+    "name": "Love Me, Love Me Not",
+    "id": "909047007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909047007.png"
+  },
+  {
+    "name": "Scissor Savvy",
+    "id": "909047008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909047008.png"
+  },
+  {
+    "name": "The Thinker",
+    "id": "909047009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909047009.png"
+  },
+  {
+    "name": "JKT48 No.1",
+    "id": "909047012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909047012.png"
+  },
+  {
+    "name": "Rasengan",
+    "id": "909047015",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909047015.png"
+  },
+  {
+    "name": "Clone Jutsu",
+    "id": "909047019",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909047019.png"
+  },
+  {
+    "name": "To the Rescue",
+    "id": "909048001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909048001.png"
+  },
+  {
+    "name": "Midnight Peruse",
+    "id": "909048002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909048002.png"
+  },
+  {
+    "name": "Guitar Groove",
+    "id": "909048003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909048003.png"
+  },
+  {
+    "name": "Keyboard Player",
+    "id": "909048004",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909048004.png"
+  },
+  {
+    "name": "On Drums",
+    "id": "909048005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909048005.png"
+  },
+  {
+    "name": "Chac-Chac",
+    "id": "909048006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909048006.png"
+  },
+  {
+    "name": "Pillow Fight",
+    "id": "909048007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909048007.png"
+  },
+  {
+    "name": "Goofy Camel",
+    "id": "909048009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909048009.png"
+  },
+  {
+    "name": "Hit a Six!",
+    "id": "909048010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909048010.png"
+  },
+  {
+    "name": "Flag Summon",
+    "id": "909048011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909048011.png"
+  },
+  {
+    "name": "Slurp slurp!",
+    "id": "909048014",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909048014.png"
+  },
+  {
+    "name": "Sketching",
+    "id": "909048015",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909048015.png"
+  },
+  {
+    "name": "Half-Time Chilling",
+    "id": "909048016",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909048016.png"
+  },
+  {
+    "name": "Throw-In",
+    "id": "909048017",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909048017.png"
+  },
+  {
+    "name": "Nailoong Time!",
+    "id": "909049001",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909049001.png"
+  },
+  {
+    "name": "Hand Raise",
+    "id": "909049002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909049002.png"
+  },
+  {
+    "name": "Kick It Up",
+    "id": "909049003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909049003.png"
+  },
+  {
+    "name": "Creation Days",
+    "id": "909049006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909049006.png"
+  },
+  {
+    "name": "Raining Coins",
+    "id": "909049007",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909049007.png"
+  },
+  {
+    "name": "Clap Clap Hooray",
+    "id": "909049008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909049008.png"
+  },
+  {
+    "name": "Infinite Loops",
+    "id": "909049009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909049009.png"
+  },
+  {
+    "name": "Boxing Machine",
+    "id": "909049011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909049011.png"
+  },
+  {
+    "name": "Comic Barf",
+    "id": "909049013",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909049013.png"
+  },
+  {
+    "name": "Spear Spin",
+    "id": "909049016",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909049016.png"
+  },
+  {
+    "name": "Flag Wave",
+    "id": "909049017",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909049017.png"
+  },
+  {
+    "name": "Disco Dazzle",
+    "id": "909049018",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909049018.png"
+  },
+  {
+    "name": "Reanimation Jutsu",
+    "id": "909050002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050002.png"
+  },
+  {
+    "name": "The Final Battle",
+    "id": "909050003",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050003.png"
+  },
+  {
+    "name": "Fire Style: Fireball Jutsu",
+    "id": "909050005",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050005.png"
+  },
+  {
+    "name": "Flying Raijin Jutsu",
+    "id": "909050006",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050006.png"
+  },
+  {
+    "name": "Hammer Slam",
+    "id": "909050008",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050008.png"
+  },
+  {
+    "name": "The Rings",
+    "id": "909050009",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050009.png"
+  },
+  {
+    "name": "Drum Twirl",
+    "id": "909050010",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050010.png"
+  },
+  {
+    "name": "Bunny Action",
+    "id": "909050011",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050011.png"
+  },
+  {
+    "name": "Broom Swoosh",
+    "id": "909050012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050012.png"
+  },
+  {
+    "name": "Blade from Heart",
+    "id": "909050013",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050013.png"
+  },
+  {
+    "name": "Bunny Wiggle",
+    "id": "909050017",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050017.png"
+  },
+  {
+    "name": "Flaming Heart",
+    "id": "909050018",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050018.png"
+  },
+  {
+    "name": "Rain or Shine",
+    "id": "909050019",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050019.png"
+  },
+  {
+    "name": "Sholay",
+    "id": "909050020",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050020.png"
+  },
+  {
+    "name": "Peak Points",
+    "id": "909050021",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050021.png"
+  },
+  {
+    "name": "Boat Race Aura",
+    "id": "909050027",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050027.png"
+  },
+  {
+    "name": "Boat Race Rowing",
+    "id": "909050028",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909050028.png"
+  },
+  {
+    "name": "Name Not Found",
+    "id": "909051002",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051002.png"
+  },
+  {
+    "name": "Celestial Shot",
+    "id": "909051012",
+    "image": "https://raw.githubusercontent.com/manus97981/emotes_img/main/images/909051012.png"
+  }
+]
