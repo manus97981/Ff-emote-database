@@ -218,8 +218,7 @@ function renderCard(u) {
   if(hasSS) ssHtml = `
     <button class="ss-btn" onclick="toggleSS(${u.id},this)">📸 Payment Screenshot</button>
     <div class="ss-preview" id="ss_${u.id}">
-      <div id="ssload_${u.id}" style="color:#fbbf24;font-size:12px;padding:6px 0;">⏳ Loading...</div>
-      <img id="ssimg_${u.id}" data-src="/screenshots/${u.id}" alt="Payment Screenshot" style="display:none;width:100%;max-width:380px;border-radius:10px;border:2px solid #d97706;margin-top:8px;">
+      <img src="/screenshots/${u.id}" loading="lazy">
     </div>`;
 
   let actionBtns = '';
@@ -479,27 +478,6 @@ function toggleSS(id, btn) {
     el.style.display = 'none'; btn.textContent = '📸 Payment Screenshot';
   } else {
     el.style.display = 'block'; btn.textContent = '🙈 Hide Screenshot';
-    const img = document.getElementById('ssimg_' + id);
-    const loader = document.getElementById('ssload_' + id);
-    // Use fetch with credentials so session cookie is sent properly
-    if(img && !img.dataset.loaded) {
-      img.dataset.loaded = '1';
-      fetch(img.dataset.src, {credentials: 'same-origin'})
-        .then(function(res) {
-          if(!res.ok) throw new Error('HTTP ' + res.status);
-          return res.blob();
-        })
-        .then(function(blob) {
-          const url = URL.createObjectURL(blob);
-          img.src = url;
-          img.style.display = 'block';
-          if(loader) loader.style.display = 'none';
-        })
-        .catch(function(err) {
-          img.dataset.loaded = '';
-          if(loader) loader.textContent = '❌ Screenshot load nahi hua. (' + err.message + ')';
-        });
-    }
   }
 }
 
