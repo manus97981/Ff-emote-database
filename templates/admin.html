@@ -175,7 +175,12 @@ function updateBadges() {
 
 function calcDaysLeft(u) {
   if (!u.unlocked || !u.unlocked_at) return null;
-  const unlockedAt = new Date(u.unlocked_at.replace(' ', 'T') + 'Z');
+  // MySQL returns "YYYY-MM-DD HH:MM:SS" — replace space with T and append Z so all
+  // browsers parse it correctly as UTC (without Z some browsers treat it as local time
+  // or return NaN entirely).
+  const raw = String(u.unlocked_at).trim().replace(' ', 'T') + 'Z';
+  const unlockedAt = new Date(raw);
+  if (isNaN(unlockedAt.getTime())) return null;   // guard against unexpected formats
   const expiry = new Date(unlockedAt.getTime() + 30 * 24 * 60 * 60 * 1000);
   return Math.ceil((expiry - new Date()) / (1000 * 60 * 60 * 24));
 }
