@@ -173,6 +173,13 @@ function updateBadges() {
   document.getElementById('statPending').textContent    = state.pending.data.length;
 }
 
+function calcDaysLeft(u) {
+  if (!u.unlocked || !u.unlocked_at) return null;
+  const unlockedAt = new Date(u.unlocked_at.replace(' ', 'T') + 'Z');
+  const expiry = new Date(unlockedAt.getTime() + 30 * 24 * 60 * 60 * 1000);
+  return Math.ceil((expiry - new Date()) / (1000 * 60 * 60 * 24));
+}
+
 function renderCard(u) {
   const hasSS = u.has_screenshot == 1;
   const isUnlocked = u.unlocked == 1;
@@ -180,10 +187,30 @@ function renderCard(u) {
   const joinDate = u.created_at ? u.created_at.substring(0,10) : '—';
   const approvedDate = u.unlocked_at ? u.unlocked_at.substring(0,10) : '';
 
+  const daysLeft = isUnlocked ? calcDaysLeft(u) : null;
+  const isExpired = daysLeft !== null && daysLeft <= 0;
+  const hasDevice = u.device_id && u.device_id.length > 0;
+
+  let expiryBadge = '';
+  if (isUnlocked && daysLeft !== null) {
+    if (isExpired) {
+      expiryBadge = `<span class="badge badge-red">⌛ Expired</span> `;
+    } else if (daysLeft <= 5) {
+      expiryBadge = `<span class="badge badge-yellow">⏰ ${daysLeft}d left</span> `;
+    } else {
+      expiryBadge = `<span class="badge" style="background:rgba(37,99,235,0.15);color:#93c5fd;border:1px solid rgba(37,99,235,0.3);">📅 ${daysLeft}d left</span> `;
+    }
+  }
+
+  const deviceBadge = hasDevice
+    ? `<span class="badge" style="background:rgba(124,58,237,0.2);color:#c4b5fd;border:1px solid rgba(124,58,237,0.3);">📱 Device Linked</span>`
+    : `<span class="badge" style="background:rgba(71,85,105,0.3);color:#94a3b8;border:1px solid #334155;">📱 No Device</span>`;
+
   let badges = '';
-  if(isUnlocked) badges += `<span class="badge badge-green">✅ Unlocked</span> `;
-  else           badges += `<span class="badge badge-red">🔒 Locked</span> `;
-  if(isPending)  badges += `<span class="badge badge-yellow">⏳ Pending</span>`;
+  if(isUnlocked && !isExpired) badges += `<span class="badge badge-green">✅ Unlocked</span> `;
+  else if(isExpired)            badges += `<span class="badge badge-red">⌛ Expired</span> `;
+  else                          badges += `<span class="badge badge-red">🔒 Locked</span> `;
+  if(isPending) badges += `<span class="badge badge-yellow">⏳ Pending</span>`;
 
   let ssHtml = '';
   if(hasSS) ssHtml = `
@@ -196,11 +223,15 @@ function renderCard(u) {
   if(isPending) {
     actionBtns += `<button class="btn btn-green" onclick="doAction('approve',${u.id},this)">✅ Approve</button>`;
     actionBtns += `<button class="btn btn-red"   onclick="doAction('reject',${u.id},this)">❌ Reject</button>`;
-  } else if(!isUnlocked) {
+  } else if(!isUnlocked || isExpired) {
     actionBtns += `<button class="btn btn-green" onclick="doAction('approve',${u.id},this)">🔓 Unlock</button>`;
   }
-  if(isUnlocked) {
+  if(isUnlocked && !isExpired) {
     actionBtns += `<button class="btn btn-orange" onclick="doAction('unapprove',${u.id},this)">🔒 Unapprove</button>`;
+    actionBtns += `<button class="btn btn-blue"   onclick="doAction('extend',${u.id},this)" title="30-din timer reset karein">🔄 Extend</button>`;
+  }
+  if(hasDevice) {
+    actionBtns += `<button class="btn btn-gray" onclick="doAction('reset-device',${u.id},this)" title="Device unlink karein">📱 Reset Device</button>`;
   }
   actionBtns += `<button class="btn btn-blue" onclick="toggleEdit(${u.id})">✏️ Edit</button>`;
   actionBtns += `<button class="btn btn-red"  onclick="doAction('delete',${u.id},this)">🗑️ Delete</button>`;
@@ -209,7 +240,8 @@ function renderCard(u) {
   <div class="user-card ${isPending?'pending-card':''}" id="card_${u.id}">
     <div class="user-name">👤 ${escHtml(u.username)}</div>
     <div class="user-email">${escHtml(u.email)}</div>
-    <div style="margin-top:6px;">${badges}</div>
+    <div style="margin-top:6px;">${badges} ${expiryBadge}</div>
+    <div style="margin-top:4px;">${deviceBadge}</div>
     <div style="font-size:10px;color:#475569;margin-top:4px;">
       Joined: ${joinDate}${approvedDate ? ' | Approved: '+approvedDate : ''}
     </div>
@@ -286,7 +318,8 @@ async function doAction(action, userId, btn) {
   const confirmMsgs = {
     reject: 'Reject aur screenshot delete karein?',
     delete: 'User delete karein?',
-    unapprove: 'Is user ko lock kar dein?'
+    unapprove: 'Is user ko lock kar dein?',
+    'reset-device': 'Is user ka device unlink karein?'
   };
   if(confirmMsgs[action] && !confirm(confirmMsgs[action])) return;
 
@@ -295,10 +328,12 @@ async function doAction(action, userId, btn) {
   btn.textContent = '⏳...';
 
   const urlMap = {
-    approve:   `/admin/approve/${userId}`,
-    reject:    `/admin/reject/${userId}`,
-    unapprove: `/admin/unapprove/${userId}`,
-    delete:    `/admin/delete-user/${userId}`,
+    approve:        `/admin/approve/${userId}`,
+    reject:         `/admin/reject/${userId}`,
+    unapprove:      `/admin/unapprove/${userId}`,
+    delete:         `/admin/delete-user/${userId}`,
+    'reset-device': `/admin/reset-device/${userId}`,
+    extend:         `/admin/extend-access/${userId}`,
   };
 
   try {
@@ -332,11 +367,18 @@ function updateUserInData(userId, action) {
     ALL_USERS[idx].unlocked = 1;
     ALL_USERS[idx].pending_payment = 0;
     ALL_USERS[idx].has_screenshot = 0;
+    ALL_USERS[idx].unlocked_at = new Date().toISOString().replace('T',' ').substring(0,19);
   } else if(action === 'reject') {
     ALL_USERS[idx].pending_payment = 0;
     ALL_USERS[idx].has_screenshot = 0;
   } else if(action === 'unapprove') {
     ALL_USERS[idx].unlocked = 0;
+    ALL_USERS[idx].unlocked_at = null;
+    ALL_USERS[idx].device_id = null;
+  } else if(action === 'reset-device') {
+    ALL_USERS[idx].device_id = null;
+  } else if(action === 'extend') {
+    ALL_USERS[idx].unlocked_at = new Date().toISOString().replace('T',' ').substring(0,19);
   }
 }
 

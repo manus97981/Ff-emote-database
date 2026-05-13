@@ -159,31 +159,19 @@ input:checked+.slider:before{transform:translateX(26px);}
 
 <!-- Login Required Modal -->
 <div class="modal-overlay" id="loginRequiredModal">
-  <div class="modal-box">
-    <div style="font-size:2.5rem;margin-bottom:10px;">🔒</div>
-    <div class="buy-text" style="font-size:15px;margin-bottom:16px;">
-      <span>Account Required!</span><br>
-      Emotes bhejna ke liye login ya register karein
-    </div>
-    <div style="display:flex;gap:10px;justify-content:center;">
-      <button onclick="window.location.href='/login'" style="background:#2563eb;color:white;border:none;padding:10px 20px;border-radius:10px;cursor:pointer;font-weight:600;">Login / Register</button>
-      <button onclick="closeSimpleModal('loginRequiredModal')" style="background:#334155;color:white;border:none;padding:10px 16px;border-radius:10px;cursor:pointer;">Cancel</button>
-    </div>
+  <div class="modal-box" style="max-width:400px;width:94%;padding:16px;">
+    <div style="font-size:13px;color:#94a3b8;margin-bottom:10px;text-align:center;">🔒 Login / Register Karne Ka Tarika</div>
+    <iframe src="https://streamable.com/e/s0zv09" allow="autoplay; encrypted-media; fullscreen" allowfullscreen style="width:100%;height:220px;border-radius:10px;border:none;display:block;"></iframe>
+    <button onclick="closeSimpleModal('loginRequiredModal')" style="width:100%;margin-top:12px;padding:9px;background:#334155;border:none;border-radius:10px;color:#94a3b8;font-size:13px;cursor:pointer;">Close ✕</button>
   </div>
 </div>
 
 <!-- Unlock Required Modal -->
 <div class="modal-overlay" id="unlockRequiredModal">
-  <div class="modal-box">
-    <div style="font-size:2.5rem;margin-bottom:10px;">🔓</div>
-    <div class="buy-text" style="font-size:15px;margin-bottom:16px;">
-      <span>Access Locked!</span><br>
-      Emote panel unlock karne ke liye<br>Rs. 300 send karein
-    </div>
-    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-      <button onclick="window.location.href='/unlock'" style="background:#7c3aed;color:white;border:none;padding:10px 20px;border-radius:10px;cursor:pointer;font-weight:600;">Unlock Karein →</button>
-      <button onclick="closeSimpleModal('unlockRequiredModal')" style="background:#334155;color:white;border:none;padding:10px 16px;border-radius:10px;cursor:pointer;">Cancel</button>
-    </div>
+  <div class="modal-box" style="max-width:400px;width:94%;padding:16px;">
+    <div style="font-size:13px;color:#94a3b8;margin-bottom:10px;text-align:center;">🔓 Unlock Karne Ka Tarika</div>
+    <iframe src="https://streamable.com/e/s0zv09" allow="autoplay; encrypted-media; fullscreen" allowfullscreen style="width:100%;height:220px;border-radius:10px;border:none;display:block;"></iframe>
+    <button onclick="closeSimpleModal('unlockRequiredModal')" style="width:100%;margin-top:12px;padding:9px;background:#334155;border:none;border-radius:10px;color:#94a3b8;font-size:13px;cursor:pointer;">Close ✕</button>
   </div>
 </div>
 
@@ -235,6 +223,33 @@ function showToast(msg){
 let allData = [], limit = 20;
 loadData();
 
+// --- Device Fingerprint ---
+function getDeviceId() {
+  const key = 'ff_device_id';
+  let did = localStorage.getItem(key);
+  if (!did) {
+    const raw = [
+      navigator.userAgent,
+      navigator.language,
+      screen.width,
+      screen.height,
+      screen.colorDepth,
+      new Date().getTimezoneOffset(),
+      navigator.hardwareConcurrency || '',
+      navigator.platform || ''
+    ].join('|');
+    // Simple hash
+    let hash = 0;
+    for (let i = 0; i < raw.length; i++) {
+      hash = ((hash << 5) - hash) + raw.charCodeAt(i);
+      hash |= 0;
+    }
+    did = 'dev_' + Math.abs(hash).toString(36) + '_' + Date.now().toString(36);
+    localStorage.setItem(key, did);
+  }
+  return did;
+}
+
 function loadData(){
   fetch('/static/final_links.json')
   .then(r=>r.json())
@@ -281,13 +296,16 @@ async function sendEmote(id, btn){
   lastSendTime[uid]=now;
   let orig=btn.innerText; btn.innerHTML='<div class="spinner"></div>'; btn.disabled=true;
   let noBot=document.getElementById('noBot').checked;
+  const deviceId = getDeviceId();
   try{
-    let r=await fetch('/send',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:`uid=${uid}&team=${team}&emote=${id}&no_bot=${noBot}`});
+    let r=await fetch('/send',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:`uid=${uid}&team=${team}&emote=${id}&no_bot=${noBot}&device_id=${encodeURIComponent(deviceId)}`});
     let d=await r.json();
     if(d.status==='success'){btn.innerText='✔ Sent';btn.classList.add('success');showToast('Success ✅');}
     else if(d.status==='blocked') showToast('You are Blocked ❌');
     else if(d.status==='login_required'){document.getElementById('loginRequiredModal').classList.add('active');}
     else if(d.status==='unlock_required'){document.getElementById('unlockRequiredModal').classList.add('active');}
+    else if(d.status==='expired'){showToast('30 din ki access khatam ❌'); document.getElementById('unlockRequiredModal').classList.add('active');}
+    else if(d.status==='device_mismatch'){showToast('Yeh account dusre device pe linked hai ❌');}
     else if(d.status==='fail') showToast('Failed to send ❌');
     else showToast('Error ❌');
   }catch(e){showToast('Server Error ❌');}
