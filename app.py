@@ -122,7 +122,18 @@ def get_all_users():
         cur.execute("SELECT id,username,email,unlocked,pending_payment,created_at,unlocked_at,device_id, CASE WHEN screenshot IS NOT NULL THEN 1 ELSE 0 END as has_screenshot, screenshot_mime FROM users ORDER BY created_at DESC")
         users = cur.fetchall()
     conn.close()
-    return list(users)
+    result = []
+    for u in users:
+        u = dict(u)
+        # Stringify datetime objects so tojson produces consistent strings in JS
+        if u.get("created_at") and not isinstance(u["created_at"], str):
+            u["created_at"] = u["created_at"].strftime('%Y-%m-%d %H:%M:%S')
+        if u.get("unlocked_at") and not isinstance(u["unlocked_at"], str):
+            u["unlocked_at"] = u["unlocked_at"].strftime('%Y-%m-%d %H:%M:%S')
+        # Pre-calculate days_remaining server-side so JS never does date math
+        u["days_remaining"] = days_remaining(u)
+        result.append(u)
+    return result
 
 def login_required(f):
     @wraps(f)
@@ -247,15 +258,44 @@ def admin_reset_device(user_id):
     conn.commit(); conn.close()
     return jsonify({"ok":True, "msg":"📱 Device reset ho gaya"}) if is_ajax() else redirect("/admin")
 
-@app.route("/admin/extend-access/<int:user_id>", methods=["POST"])
-def admin_extend_access(user_id):
+@app.route("/admin/adjust-days/<int:user_id>", methods=["POST"])
+def admin_adjust_days(user_id):
     if not session.get("admin"): return (jsonify({"ok":False}), 403) if is_ajax() else redirect("/admin")
+    try:
+        days = int(request.form.get("days", 0))
+    except (ValueError, TypeError):
+        return jsonify({"ok":False, "msg":"Invalid days"}), 400
+    if days == 0:
+        return jsonify({"ok":False, "msg":"Days 0 nahi ho sakta"}), 400
+
     conn = get_db()
     with conn.cursor() as cur:
+        cur.execute("SELECT unlocked_at, unlocked FROM users WHERE id=%s", (user_id,))
+        row = cur.fetchone()
+        if not row:
+            conn.close()
+            return jsonify({"ok":False, "msg":"User not found"}), 404
+
+        unlocked_at = row["unlocked_at"]
+        # If no unlocked_at yet, start from today
+        if not unlocked_at:
+            unlocked_at = datetime.datetime.utcnow()
+        elif isinstance(unlocked_at, str):
+            unlocked_at = datetime.datetime.strptime(unlocked_at, "%Y-%m-%d %H:%M:%S")
+
+        new_unlocked_at = unlocked_at + datetime.timedelta(days=days)
         cur.execute("UPDATE users SET unlocked=1, unlocked_at=%s WHERE id=%s",
-                    (datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'), user_id))
-    conn.commit(); conn.close()
-    return jsonify({"ok":True, "msg":"🔄 Access 30 din ke liye extend ho gaya"}) if is_ajax() else redirect("/admin")
+                    (new_unlocked_at.strftime("%Y-%m-%d %H:%M:%S"), user_id))
+    conn.commit()
+
+    # Return new days_remaining so frontend can update without refresh
+    with conn.cursor() as cur:
+        cur.execute("SELECT unlocked, unlocked_at FROM users WHERE id=%s", (user_id,))
+        updated = cur.fetchone()
+    conn.close()
+    remaining = days_remaining(updated)
+    sign = "+" if days > 0 else ""
+    return jsonify({"ok":True, "msg":f"📅 {sign}{days} din ho gaye — {remaining} din bacha hai", "days_remaining": remaining}) if is_ajax() else redirect("/admin")
 def admin_edit_user(user_id):
     if not session.get("admin"): return (jsonify({"ok":False}), 403) if is_ajax() else redirect("/admin")
     username = request.form.get("username","").strip()
