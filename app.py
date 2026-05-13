@@ -123,7 +123,7 @@ def get_all_users():
     conn = get_db()
     with conn.cursor() as cur:
         # Don't fetch screenshot blob in list — fetch separately when needed
-        cur.execute("SELECT id,username,email,unlocked,pending_payment,payment_rejected,created_at,unlocked_at,device_id, CASE WHEN screenshot IS NOT NULL THEN 1 ELSE 0 END as has_screenshot, screenshot_mime FROM users ORDER BY created_at DESC")
+        cur.execute("SELECT id,username,email,unlocked,pending_payment,payment_rejected,created_at,unlocked_at,device_id, CASE WHEN screenshot IS NOT NULL AND LENGTH(screenshot) > 0 THEN 1 ELSE 0 END as has_screenshot, screenshot_mime FROM users ORDER BY created_at DESC")
         users = cur.fetchall()
     conn.close()
     result = []
