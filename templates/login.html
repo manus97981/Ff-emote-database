@@ -23,8 +23,7 @@ body { font-family:'Inter',sans-serif; background:#0b1120; min-height:100vh; dis
 .video-btn { display:flex; align-items:center; justify-content:center; gap:10px; padding:12px 16px; border:none; border-radius:14px; font-size:0.9rem; font-weight:600; cursor:pointer; transition:0.3s; width:100%; }
 .video-btn.how-to { background:linear-gradient(135deg,#dc2626,#b91c1c); color:white; }
 .video-btn.how-to:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(220,38,38,0.4); }
-.video-btn.headshot { background:linear-gradient(135deg,#7c3aed,#5b21b6); color:white; }
-.video-btn.headshot:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(124,58,237,0.4); }
+
 .video-btn i { font-size:1.1rem; }
 
 .tabs { display:flex; gap:1rem; margin-bottom:2rem; border-bottom:1px solid var(--border); }
@@ -71,9 +70,7 @@ body { font-family:'Inter',sans-serif; background:#0b1120; min-height:100vh; dis
       <button class="video-btn how-to" onclick="openVideoModal('how-to')">
         <i class="fab fa-youtube"></i> Istamal Karna Ka Tarika (How To Use)
       </button>
-      <button class="video-btn headshot" onclick="openVideoModal('headshot')">
-        <i class="fas fa-crosshairs"></i> Headshot Panel — Dekhein
-      </button>
+
     </div>
 
     <div class="tabs">
@@ -134,14 +131,7 @@ body { font-family:'Inter',sans-serif; background:#0b1120; min-height:100vh; dis
   </div>
 </div>
 
-<!-- Headshot Panel Video Popup -->
-<div class="modal-overlay" id="headshotModal">
-  <div class="modal-box">
-    <iframe id="headshotFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    <div class="modal-title">🎯 Headshot Panel — 03349039174 | Price = 500</div>
-    <button class="modal-close" onclick="closeVideoModal('headshot')">Close ✕</button>
-  </div>
-</div>
+
 
 <script>
 // Tab switching
@@ -234,24 +224,15 @@ async function doRegister() {
 // Video modals
 function openVideoModal(type) {
   if(type === 'how-to') {
-    document.getElementById('howToFrame').src = 'https://www.youtube.com/embed/FkdxnfP8hL4?autoplay=1';
+    document.getElementById('howToFrame').src = 'https://www.youtube.com/embed/GXvjV5kJ39s?autoplay=1';
     document.getElementById('howToModal').classList.add('active');
-  } else {
-    document.getElementById('headshotFrame').src = 'https://www.youtube.com/embed/p-dThBfhXEI?autoplay=1';
-    document.getElementById('headshotModal').classList.add('active');
   }
 }
 function closeVideoModal(type) {
-  if(type === 'how-to') {
-    document.getElementById('howToFrame').src = '';
-    document.getElementById('howToModal').classList.remove('active');
-  } else {
-    document.getElementById('headshotFrame').src = '';
-    document.getElementById('headshotModal').classList.remove('active');
-  }
+  document.getElementById('howToFrame').src = '';
+  document.getElementById('howToModal').classList.remove('active');
 }
 document.getElementById('howToModal').addEventListener('click', e => { if(e.target===document.getElementById('howToModal')) closeVideoModal('how-to'); });
-document.getElementById('headshotModal').addEventListener('click', e => { if(e.target===document.getElementById('headshotModal')) closeVideoModal('headshot'); });
 </script>
 </body>
 </html>
