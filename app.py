@@ -8,9 +8,9 @@ app = Flask(__name__, template_folder="templates")
 app.secret_key = "shani_store_secret_2024"
 JWT_SECRET = "shani_store_jwt_secret_2024"
 
-# ---- MySQL Config (Railway) ----
-MYSQL_HOST     = "mysql.railway.internal"
-MYSQL_PORT     = 3306
+# ---- MySQL Config (Railway Public Proxy) ----
+MYSQL_HOST     = "yamabiko.proxy.rlwy.net"
+MYSQL_PORT     = 52874
 MYSQL_USER     = "root"
 MYSQL_PASSWORD = "NbsYqIURPJKwcmisxGfaqDMdUzzGOfTj"
 MYSQL_DB       = "railway"
