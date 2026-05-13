@@ -11,37 +11,40 @@ h1{color:#60a5fa;margin-bottom:15px;font-size:1.4rem;}
 .nav a{color:#94a3b8;text-decoration:none;font-size:13px;padding:6px 12px;background:#1e293b;border-radius:8px;}
 .nav a:hover{color:white;background:#2563eb;}
 .section{background:#1e293b;border-radius:14px;padding:16px;margin-bottom:20px;border:1px solid #334155;}
-.section h2{font-size:0.95rem;color:#94a3b8;margin-bottom:14px;display:flex;align-items:center;gap:6px;}
-input[type=text],input[type=email]{padding:8px 12px;background:#0f172a;border:1px solid #334155;border-radius:8px;color:white;font-size:13px;}
-.btn{padding:7px 14px;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:12px;}
+.section h2{font-size:0.95rem;color:#94a3b8;margin-bottom:14px;}
+input[type=text]{padding:8px 12px;background:#0f172a;border:1px solid #334155;border-radius:8px;color:white;font-size:13px;}
+.btn{padding:7px 14px;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:12px;transition:opacity 0.2s;}
 .btn-red{background:#dc2626;color:white;}
 .btn-green{background:#16a34a;color:white;}
 .btn-blue{background:#2563eb;color:white;}
-.btn-yellow{background:#d97706;color:white;}
 .btn-gray{background:#475569;color:white;}
 .btn-orange{background:#ea580c;color:white;}
-.btn:hover{opacity:0.85;}
-.download-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:#0f766e;color:white;border:none;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;text-decoration:none;margin-bottom:16px;border:1px solid #14b8a6;}
+.btn:hover:not(:disabled){opacity:0.85;}
+.btn:disabled{opacity:0.5;cursor:not-allowed;}
+.download-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:#0f766e;color:white;border:none;border-radius:10px;font-size:13px;font-weight:600;text-decoration:none;margin-bottom:16px;border:1px solid #14b8a6;}
 .download-btn:hover{background:#0d9488;}
 .tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;}
 .tab-btn{padding:7px 16px;border:1px solid #334155;background:#0f172a;color:#94a3b8;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;}
 .tab-btn.active{background:#2563eb;color:white;border-color:#2563eb;}
 .tab-content{display:none;}
 .tab-content.active{display:block;}
-.tab-badge{display:inline-block;background:#dc2626;color:white;border-radius:99px;font-size:10px;padding:1px 7px;margin-left:5px;vertical-align:middle;}
-.user-card{background:#0f172a;border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid #334155;}
-.user-card.pending-card{border-color:#d97706;box-shadow:0 0 0 1px rgba(217,119,6,0.3);}
+.tab-badge{display:inline-block;color:white;border-radius:99px;font-size:10px;padding:1px 7px;margin-left:4px;vertical-align:middle;}
+.user-card{background:#0f172a;border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid #334155;transition:opacity 0.4s,transform 0.4s;}
+.user-card.pending-card{border-color:#d97706;}
+.user-card.fade-out{opacity:0;transform:translateY(-6px);}
 .user-name{font-size:15px;font-weight:700;}
 .user-email{font-size:11px;color:#64748b;margin-top:2px;}
 .badge{display:inline-block;padding:3px 9px;border-radius:6px;font-size:11px;font-weight:600;}
 .badge-green{background:rgba(22,163,74,0.2);color:#4ade80;border:1px solid rgba(22,163,74,0.3);}
 .badge-red{background:rgba(220,38,38,0.2);color:#f87171;border:1px solid rgba(220,38,38,0.3);}
 .badge-yellow{background:rgba(217,119,6,0.2);color:#fbbf24;border:1px solid rgba(217,119,6,0.3);}
-.user-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.user-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.result-msg{font-size:12px;font-weight:600;padding:4px 10px;border-radius:6px;display:none;}
+.result-msg.ok{background:rgba(22,163,74,0.2);color:#4ade80;}
+.result-msg.err{background:rgba(220,38,38,0.2);color:#f87171;}
 .ss-preview{margin-top:10px;display:none;}
 .ss-preview img{width:100%;max-width:380px;border-radius:10px;border:2px solid #d97706;margin-top:8px;}
 .ss-btn{background:none;border:1px solid #d97706;color:#fbbf24;padding:5px 12px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600;}
-.ss-btn:hover{background:rgba(217,119,6,0.15);}
 .edit-form{background:#0b1120;border-radius:10px;padding:12px;margin-top:10px;display:none;border:1px solid #334155;}
 .edit-form label{font-size:12px;color:#94a3b8;display:block;margin-bottom:4px;}
 .edit-form input{width:100%;margin-bottom:10px;}
@@ -53,82 +56,13 @@ input[type=text],input[type=email]{padding:8px 12px;background:#0f172a;border:1p
 .stat-card .num{font-size:1.8rem;font-weight:800;color:#60a5fa;}
 .stat-card .lbl{font-size:11px;color:#64748b;margin-top:4px;}
 .empty{color:#475569;font-size:13px;text-align:center;padding:20px 0;}
+.load-more-btn{width:100%;padding:11px;background:#1e293b;border:1px solid #334155;color:#94a3b8;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;margin-top:6px;transition:all 0.2s;}
+.load-more-btn:hover{background:#2563eb;color:white;border-color:#2563eb;}
+.load-more-btn:disabled{opacity:0.4;cursor:not-allowed;}
+.showing-count{font-size:11px;color:#475569;text-align:center;margin-bottom:10px;}
 </style>
 </head>
 <body>
-
-{# MACRO MUST BE DEFINED FIRST BEFORE USE #}
-{% macro render_user_card(u) %}
-<div class="user-card {% if u.pending_payment %}pending-card{% endif %}">
-  <div style="margin-bottom:10px;">
-    <div class="user-name">👤 {{ u.username }}</div>
-    <div class="user-email">{{ u.email }}</div>
-    <div style="margin-top:6px;display:flex;gap:5px;flex-wrap:wrap;">
-      {% if u.unlocked %}
-      <span class="badge badge-green">✅ Unlocked</span>
-      {% else %}
-      <span class="badge badge-red">🔒 Locked</span>
-      {% endif %}
-      {% if u.pending_payment %}
-      <span class="badge badge-yellow">⏳ Payment Pending</span>
-      {% endif %}
-    </div>
-    <div style="font-size:10px;color:#475569;margin-top:4px;">
-      Joined: {{ u.created_at.strftime('%Y-%m-%d') if u.created_at else '—' }}
-      {% if u.unlocked_at %} | Approved: {{ u.unlocked_at.strftime('%Y-%m-%d') if u.unlocked_at else '—' }}{% endif %}
-    </div>
-  </div>
-
-  {% if u.has_screenshot %}
-  <button class="ss-btn" onclick="toggleSS('ss_{{u.id}}', this)">📸 Payment Screenshot Dekho</button>
-  <div class="ss-preview" id="ss_{{u.id}}">
-    <img src="/screenshots/{{ u.id }}" alt="Payment Screenshot" loading="lazy">
-  </div>
-  {% endif %}
-
-  <div class="user-actions">
-    {% if u.pending_payment %}
-    <form method="POST" action="/admin/approve/{{ u.id }}">
-      <button type="submit" class="btn btn-green">✅ Approve</button>
-    </form>
-    <form method="POST" action="/admin/reject/{{ u.id }}">
-      <button type="submit" class="btn btn-red" onclick="return confirm('Reject aur screenshot delete karein?')">❌ Reject</button>
-    </form>
-    {% elif not u.unlocked %}
-    <form method="POST" action="/admin/approve/{{ u.id }}">
-      <button type="submit" class="btn btn-green">🔓 Manually Unlock</button>
-    </form>
-    {% endif %}
-
-    {% if u.unlocked %}
-    <form method="POST" action="/admin/unapprove/{{ u.id }}">
-      <button type="submit" class="btn btn-orange" onclick="return confirm('Is user ko lock kar dein?')">🔒 Unapprove</button>
-    </form>
-    {% endif %}
-
-    <button class="btn btn-blue" onclick="toggleEdit('edit_{{u.id}}')">✏️ Edit</button>
-    <form method="POST" action="/admin/delete-user/{{ u.id }}" onsubmit="return confirm('User delete karein?')">
-      <button type="submit" class="btn btn-red">🗑️ Delete</button>
-    </form>
-  </div>
-
-  <div class="edit-form" id="edit_{{u.id}}">
-    <form method="POST" action="/admin/edit-user/{{ u.id }}">
-      <label>Username</label>
-      <input type="text" name="username" value="{{ u.username }}" required>
-      <label>Status</label>
-      <select name="unlocked">
-        <option value="1" {% if u.unlocked %}selected{% endif %}>✅ Unlocked</option>
-        <option value="0" {% if not u.unlocked %}selected{% endif %}>🔒 Locked</option>
-      </select>
-      <div style="display:flex;gap:8px;">
-        <button type="submit" class="btn btn-green">💾 Save</button>
-        <button type="button" class="btn btn-gray" onclick="toggleEdit('edit_{{u.id}}')">Cancel</button>
-      </div>
-    </form>
-  </div>
-</div>
-{% endmacro %}
 
 <h1>⚡ Shani Store — Admin Panel</h1>
 <div class="nav">
@@ -137,57 +71,51 @@ input[type=text],input[type=email]{padding:8px 12px;background:#0f172a;border:1p
   <a href="/logout">🚪 Logout</a>
 </div>
 
-{% set total = users|length %}
-{% set unlocked_count = users|selectattr('unlocked','equalto',1)|list|length %}
-{% set pending_count = users|selectattr('pending_payment','equalto',1)|list|length %}
-
 <div class="stats">
   <div class="stat-card">
-    <div class="num">{{ total }}</div>
+    <div class="num" id="statTotal">{{ users|length }}</div>
     <div class="lbl">Total Users</div>
   </div>
   <div class="stat-card">
-    <div class="num" style="color:#4ade80;">{{ unlocked_count }}</div>
+    <div class="num" style="color:#4ade80;" id="statUnlocked">{{ users|selectattr('unlocked','equalto',1)|list|length }}</div>
     <div class="lbl">Unlocked</div>
   </div>
   <div class="stat-card">
-    <div class="num" style="color:#fbbf24;">{{ pending_count }}</div>
-    <div class="lbl">Pending Payment</div>
+    <div class="num" style="color:#fbbf24;" id="statPending">{{ users|selectattr('pending_payment','equalto',1)|list|length }}</div>
+    <div class="lbl">Pending</div>
   </div>
 </div>
 
-<a href="/admin/download-db" class="download-btn">⬇️ Download Full Database (CSV)</a>
+<a href="/admin/download-db" class="download-btn">⬇️ Download Database (CSV)</a>
 
 <div class="section">
   <h2>👥 Users</h2>
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('all', this)">All <span class="tab-badge" style="background:#475569;">{{ total }}</span></button>
-    <button class="tab-btn" onclick="switchTab('pending', this)">⏳ Pending {% if pending_count > 0 %}<span class="tab-badge">{{ pending_count }}</span>{% endif %}</button>
-    <button class="tab-btn" onclick="switchTab('approved', this)">✅ Approved <span class="tab-badge" style="background:#16a34a;">{{ unlocked_count }}</span></button>
-    <button class="tab-btn" onclick="switchTab('locked', this)">🔒 Locked</button>
+    <button class="tab-btn active" onclick="switchTab('all',this)">All <span class="tab-badge" style="background:#475569;" id="badge-all">0</span></button>
+    <button class="tab-btn" onclick="switchTab('pending',this)">⏳ Pending <span class="tab-badge" style="background:#d97706;" id="badge-pending">0</span></button>
+    <button class="tab-btn" onclick="switchTab('approved',this)">✅ Approved <span class="tab-badge" style="background:#16a34a;" id="badge-approved">0</span></button>
+    <button class="tab-btn" onclick="switchTab('locked',this)">🔒 Locked <span class="tab-badge" style="background:#475569;" id="badge-locked">0</span></button>
   </div>
 
   <div class="tab-content active" id="tab-all">
-    {% if not users %}<p class="empty">No users yet</p>{% endif %}
-    {% for u in users %}{{ render_user_card(u) }}{% endfor %}
+    <div class="showing-count" id="count-all"></div>
+    <div id="list-all"></div>
+    <button class="load-more-btn" id="more-all" onclick="loadMore('all')" style="display:none">⬇️ Load More</button>
   </div>
-
   <div class="tab-content" id="tab-pending">
-    {% set pending_users = users|selectattr('pending_payment','equalto',1)|list %}
-    {% if not pending_users %}<p class="empty">📭 Koi pending payment nahi</p>{% endif %}
-    {% for u in pending_users %}{{ render_user_card(u) }}{% endfor %}
+    <div class="showing-count" id="count-pending"></div>
+    <div id="list-pending"></div>
+    <button class="load-more-btn" id="more-pending" onclick="loadMore('pending')" style="display:none">⬇️ Load More</button>
   </div>
-
   <div class="tab-content" id="tab-approved">
-    {% set approved_users = users|selectattr('unlocked','equalto',1)|list %}
-    {% if not approved_users %}<p class="empty">No approved users yet</p>{% endif %}
-    {% for u in approved_users %}{{ render_user_card(u) }}{% endfor %}
+    <div class="showing-count" id="count-approved"></div>
+    <div id="list-approved"></div>
+    <button class="load-more-btn" id="more-approved" onclick="loadMore('approved')" style="display:none">⬇️ Load More</button>
   </div>
-
   <div class="tab-content" id="tab-locked">
-    {% set locked_users = users|selectattr('unlocked','equalto',0)|selectattr('pending_payment','equalto',0)|list %}
-    {% if not locked_users %}<p class="empty">No locked users</p>{% endif %}
-    {% for u in locked_users %}{{ render_user_card(u) }}{% endfor %}
+    <div class="showing-count" id="count-locked"></div>
+    <div id="list-locked"></div>
+    <button class="load-more-btn" id="more-locked" onclick="loadMore('locked')" style="display:none">⬇️ Load More</button>
   </div>
 </div>
 
@@ -202,8 +130,7 @@ input[type=text],input[type=email]{padding:8px 12px;background:#0f172a;border:1p
   {% if uids %}
   <div style="display:flex;flex-wrap:wrap;gap:8px;">
     {% for uid in uids %}
-    <div class="block-uid">
-      {{ uid }}
+    <div class="block-uid">{{ uid }}
       <form method="POST" action="/unblock" style="display:inline;">
         <input type="hidden" name="uid" value="{{ uid }}">
         <button type="submit" style="background:none;border:none;color:white;cursor:pointer;font-size:13px;">✕</button>
@@ -217,24 +144,274 @@ input[type=text],input[type=email]{padding:8px 12px;background:#0f172a;border:1p
 </div>
 
 <script>
-function toggleSS(id, btn) {
-  const el = document.getElementById(id);
-  if(el.style.display === 'block') {
-    el.style.display = 'none'; btn.textContent = '📸 Payment Screenshot Dekho';
+// All users data from server — passed once, no more full page reloads
+const ALL_USERS = {{ users | tojson }};
+const PAGE_SIZE = 10;
+
+// Per-tab state
+const state = {
+  all:      { data: [],  shown: 0 },
+  pending:  { data: [],  shown: 0 },
+  approved: { data: [],  shown: 0 },
+  locked:   { data: [],  shown: 0 },
+};
+
+function buildData() {
+  state.all.data      = ALL_USERS;
+  state.pending.data  = ALL_USERS.filter(u => u.pending_payment == 1);
+  state.approved.data = ALL_USERS.filter(u => u.unlocked == 1);
+  state.locked.data   = ALL_USERS.filter(u => u.unlocked == 0 && u.pending_payment == 0);
+}
+
+function updateBadges() {
+  document.getElementById('badge-all').textContent      = state.all.data.length;
+  document.getElementById('badge-pending').textContent  = state.pending.data.length;
+  document.getElementById('badge-approved').textContent = state.approved.data.length;
+  document.getElementById('badge-locked').textContent   = state.locked.data.length;
+  document.getElementById('statTotal').textContent      = state.all.data.length;
+  document.getElementById('statUnlocked').textContent   = state.approved.data.length;
+  document.getElementById('statPending').textContent    = state.pending.data.length;
+}
+
+function renderCard(u) {
+  const hasSS = u.has_screenshot == 1;
+  const isUnlocked = u.unlocked == 1;
+  const isPending = u.pending_payment == 1;
+  const joinDate = u.created_at ? u.created_at.substring(0,10) : '—';
+  const approvedDate = u.unlocked_at ? u.unlocked_at.substring(0,10) : '';
+
+  let badges = '';
+  if(isUnlocked) badges += `<span class="badge badge-green">✅ Unlocked</span> `;
+  else           badges += `<span class="badge badge-red">🔒 Locked</span> `;
+  if(isPending)  badges += `<span class="badge badge-yellow">⏳ Pending</span>`;
+
+  let ssHtml = '';
+  if(hasSS) ssHtml = `
+    <button class="ss-btn" onclick="toggleSS(${u.id},this)">📸 Payment Screenshot</button>
+    <div class="ss-preview" id="ss_${u.id}">
+      <img src="/screenshots/${u.id}" loading="lazy">
+    </div>`;
+
+  let actionBtns = '';
+  if(isPending) {
+    actionBtns += `<button class="btn btn-green" onclick="doAction('approve',${u.id},this)">✅ Approve</button>`;
+    actionBtns += `<button class="btn btn-red"   onclick="doAction('reject',${u.id},this)">❌ Reject</button>`;
+  } else if(!isUnlocked) {
+    actionBtns += `<button class="btn btn-green" onclick="doAction('approve',${u.id},this)">🔓 Unlock</button>`;
+  }
+  if(isUnlocked) {
+    actionBtns += `<button class="btn btn-orange" onclick="doAction('unapprove',${u.id},this)">🔒 Unapprove</button>`;
+  }
+  actionBtns += `<button class="btn btn-blue" onclick="toggleEdit(${u.id})">✏️ Edit</button>`;
+  actionBtns += `<button class="btn btn-red"  onclick="doAction('delete',${u.id},this)">🗑️ Delete</button>`;
+
+  return `
+  <div class="user-card ${isPending?'pending-card':''}" id="card_${u.id}">
+    <div class="user-name">👤 ${escHtml(u.username)}</div>
+    <div class="user-email">${escHtml(u.email)}</div>
+    <div style="margin-top:6px;">${badges}</div>
+    <div style="font-size:10px;color:#475569;margin-top:4px;">
+      Joined: ${joinDate}${approvedDate ? ' | Approved: '+approvedDate : ''}
+    </div>
+    ${ssHtml}
+    <div class="user-actions">
+      ${actionBtns}
+      <span class="result-msg" id="msg_${u.id}"></span>
+    </div>
+    <div class="edit-form" id="edit_${u.id}">
+      <form onsubmit="submitEdit(event,${u.id})">
+        <label>Username</label>
+        <input type="text" name="username" value="${escHtml(u.username)}" required style="width:100%;margin-bottom:10px;">
+        <label>Status</label>
+        <select name="unlocked" style="width:100%;padding:8px;background:#0f172a;border:1px solid #334155;border-radius:8px;color:white;margin-bottom:10px;">
+          <option value="1" ${isUnlocked?'selected':''}>✅ Unlocked</option>
+          <option value="0" ${!isUnlocked?'selected':''}>🔒 Locked</option>
+        </select>
+        <div style="display:flex;gap:8px;">
+          <button type="submit" class="btn btn-green">💾 Save</button>
+          <button type="button" class="btn btn-gray" onclick="toggleEdit(${u.id})">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>`;
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function loadMore(tab) {
+  const s = state[tab];
+  const list = document.getElementById('list-' + tab);
+  const btn  = document.getElementById('more-' + tab);
+  const count = document.getElementById('count-' + tab);
+
+  const next = s.data.slice(s.shown, s.shown + PAGE_SIZE);
+  next.forEach(u => list.insertAdjacentHTML('beforeend', renderCard(u)));
+  s.shown += next.length;
+
+  const total = s.data.length;
+  count.textContent = total === 0 ? '' : `Showing ${s.shown} of ${total}`;
+
+  if(s.shown >= total) {
+    btn.style.display = 'none';
   } else {
-    el.style.display = 'block'; btn.textContent = '🙈 Hide Screenshot';
+    btn.style.display = 'block';
+    btn.textContent = `⬇️ Load More (${total - s.shown} remaining)`;
+  }
+
+  if(total === 0) {
+    list.innerHTML = '<p class="empty">Koi user nahi</p>';
   }
 }
-function toggleEdit(id) {
-  const el = document.getElementById(id);
-  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+
+function initTab(tab) {
+  state[tab].shown = 0;
+  document.getElementById('list-' + tab).innerHTML = '';
+  document.getElementById('more-' + tab).style.display = 'none';
+  loadMore(tab);
 }
+
 function switchTab(name, btn) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   btn.classList.add('active');
+  // Lazy init — only render when tab is first opened
+  if(state[name].shown === 0) initTab(name);
 }
+
+// ---- AJAX actions ----
+async function doAction(action, userId, btn) {
+  const confirmMsgs = {
+    reject: 'Reject aur screenshot delete karein?',
+    delete: 'User delete karein?',
+    unapprove: 'Is user ko lock kar dein?'
+  };
+  if(confirmMsgs[action] && !confirm(confirmMsgs[action])) return;
+
+  const origText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = '⏳...';
+
+  const urlMap = {
+    approve:   `/admin/approve/${userId}`,
+    reject:    `/admin/reject/${userId}`,
+    unapprove: `/admin/unapprove/${userId}`,
+    delete:    `/admin/delete-user/${userId}`,
+  };
+
+  try {
+    const res = await fetch(urlMap[action], { method:'POST', headers:{'X-Requested-With':'XMLHttpRequest'} });
+    const data = await res.json();
+    if(data.ok) {
+      showMsg(userId, data.msg || 'Done', 'ok');
+      // Update local data and re-render after short delay
+      setTimeout(() => {
+        updateUserInData(userId, action);
+        rebuildAllTabs();
+      }, 600);
+    } else {
+      showMsg(userId, data.msg || 'Error', 'err');
+      btn.disabled = false;
+      btn.textContent = origText;
+    }
+  } catch(e) {
+    showMsg(userId, 'Network error', 'err');
+    btn.disabled = false;
+    btn.textContent = origText;
+  }
+}
+
+function updateUserInData(userId, action) {
+  const idx = ALL_USERS.findIndex(u => u.id === userId);
+  if(idx === -1) return;
+  if(action === 'delete') {
+    ALL_USERS.splice(idx, 1);
+  } else if(action === 'approve') {
+    ALL_USERS[idx].unlocked = 1;
+    ALL_USERS[idx].pending_payment = 0;
+    ALL_USERS[idx].has_screenshot = 0;
+  } else if(action === 'reject') {
+    ALL_USERS[idx].pending_payment = 0;
+    ALL_USERS[idx].has_screenshot = 0;
+  } else if(action === 'unapprove') {
+    ALL_USERS[idx].unlocked = 0;
+  }
+}
+
+function rebuildAllTabs() {
+  buildData();
+  updateBadges();
+  // Re-render all already-opened tabs
+  ['all','pending','approved','locked'].forEach(tab => {
+    if(state[tab].shown > 0) {
+      const prevShown = state[tab].shown;
+      state[tab].shown = 0;
+      document.getElementById('list-' + tab).innerHTML = '';
+      // Re-show same number of cards (capped at data length)
+      const toShow = Math.min(prevShown, state[tab].data.length);
+      const chunks = Math.ceil(toShow / PAGE_SIZE) || 1;
+      for(let i=0;i<chunks;i++) loadMore(tab);
+    }
+  });
+}
+
+async function submitEdit(e, userId) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('button[type=submit]');
+  btn.disabled = true;
+  btn.textContent = '⏳ Saving...';
+  const body = new FormData(form);
+  try {
+    const res = await fetch(`/admin/edit-user/${userId}`, { method:'POST', body, headers:{'X-Requested-With':'XMLHttpRequest'} });
+    const data = await res.json();
+    if(data.ok) {
+      // Update local data
+      const idx = ALL_USERS.findIndex(u => u.id === userId);
+      if(idx !== -1) {
+        ALL_USERS[idx].username = body.get('username');
+        ALL_USERS[idx].unlocked = parseInt(body.get('unlocked'));
+      }
+      rebuildAllTabs();
+    } else {
+      btn.disabled = false;
+      btn.textContent = '💾 Save';
+    }
+  } catch(e) {
+    btn.disabled = false;
+    btn.textContent = '💾 Save';
+  }
+}
+
+function showMsg(userId, text, type) {
+  const el = document.getElementById('msg_' + userId);
+  if(!el) return;
+  el.textContent = text;
+  el.className = 'result-msg ' + type;
+  el.style.display = 'inline-block';
+  setTimeout(() => { el.style.display = 'none'; }, 3000);
+}
+
+function toggleSS(id, btn) {
+  const el = document.getElementById('ss_' + id);
+  if(el.style.display === 'block') {
+    el.style.display = 'none'; btn.textContent = '📸 Payment Screenshot';
+  } else {
+    el.style.display = 'block'; btn.textContent = '🙈 Hide Screenshot';
+  }
+}
+
+function toggleEdit(id) {
+  const el = document.getElementById('edit_' + id);
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+
+// Boot
+buildData();
+updateBadges();
+initTab('all');
 </script>
 </body>
 </html>
