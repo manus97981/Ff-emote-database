@@ -69,6 +69,10 @@ def init_db():
             cur.execute("ALTER TABLE users ADD COLUMN device_id VARCHAR(255) DEFAULT NULL")
         except:
             pass
+        try:
+            cur.execute("ALTER TABLE users ADD COLUMN payment_rejected TINYINT(1) DEFAULT 0")
+        except:
+            pass
     conn.commit()
     conn.close()
 
@@ -110,7 +114,7 @@ def verify_token(token):
 def get_user(email):
     conn = get_db()
     with conn.cursor() as cur:
-        cur.execute("SELECT id,username,email,password_hash,unlocked,pending_payment,created_at,unlocked_at,device_id FROM users WHERE email=%s", (email,))
+        cur.execute("SELECT id,username,email,password_hash,unlocked,pending_payment,payment_rejected,created_at,unlocked_at,device_id FROM users WHERE email=%s", (email,))
         u = cur.fetchone()
     conn.close()
     return u if u else None
@@ -119,7 +123,7 @@ def get_all_users():
     conn = get_db()
     with conn.cursor() as cur:
         # Don't fetch screenshot blob in list — fetch separately when needed
-        cur.execute("SELECT id,username,email,unlocked,pending_payment,created_at,unlocked_at,device_id, CASE WHEN screenshot IS NOT NULL THEN 1 ELSE 0 END as has_screenshot, screenshot_mime FROM users ORDER BY created_at DESC")
+        cur.execute("SELECT id,username,email,unlocked,pending_payment,payment_rejected,created_at,unlocked_at,device_id, CASE WHEN screenshot IS NOT NULL THEN 1 ELSE 0 END as has_screenshot, screenshot_mime FROM users ORDER BY created_at DESC")
         users = cur.fetchall()
     conn.close()
     result = []
@@ -217,7 +221,7 @@ def admin_approve(user_id):
     if not session.get("admin"): return (jsonify({"ok":False}), 403) if is_ajax() else redirect("/admin")
     conn = get_db()
     with conn.cursor() as cur:
-        cur.execute("UPDATE users SET unlocked=1, pending_payment=0, screenshot=NULL, screenshot_mime=NULL, unlocked_at=%s WHERE id=%s",
+        cur.execute("UPDATE users SET unlocked=1, pending_payment=0, screenshot=NULL, screenshot_mime=NULL, payment_rejected=0, unlocked_at=%s WHERE id=%s",
                     (datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'), user_id))
     conn.commit(); conn.close()
     return jsonify({"ok":True, "msg":"✅ Approved"}) if is_ajax() else redirect("/admin")
@@ -236,7 +240,7 @@ def admin_reject(user_id):
     if not session.get("admin"): return (jsonify({"ok":False}), 403) if is_ajax() else redirect("/admin")
     conn = get_db()
     with conn.cursor() as cur:
-        cur.execute("UPDATE users SET pending_payment=0, screenshot=NULL, screenshot_mime=NULL WHERE id=%s", (user_id,))
+        cur.execute("UPDATE users SET pending_payment=0, screenshot=NULL, screenshot_mime=NULL, payment_rejected=1 WHERE id=%s", (user_id,))
     conn.commit(); conn.close()
     return jsonify({"ok":True, "msg":"❌ Rejected"}) if is_ajax() else redirect("/admin")
 
@@ -445,7 +449,7 @@ def upload_screenshot(user):
     mime = mime_map[ext]
     conn = get_db()
     with conn.cursor() as cur:
-        cur.execute("UPDATE users SET pending_payment=1, screenshot=%s, screenshot_mime=%s WHERE id=%s",
+        cur.execute("UPDATE users SET pending_payment=1, screenshot=%s, screenshot_mime=%s, payment_rejected=0 WHERE id=%s",
                     (img_b64, mime, user["id"]))
     conn.commit(); conn.close()
     return jsonify({"success":True,"message":"Screenshot upload ho gaya! Admin verify kar ke unlock karega."}), 200
