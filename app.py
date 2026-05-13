@@ -7,6 +7,21 @@ from functools import wraps
 app = Flask(__name__, template_folder="templates")
 app.secret_key = "shani_store_secret_2024"
 JWT_SECRET = "shani_store_jwt_secret_2024"
+SCREENSHOT_SECRET = "shani_ss_secret_2024"
+
+def make_screenshot_token(user_id):
+    """Generate a short-lived signed token for serving a screenshot."""
+    payload = {
+        "ss_uid": user_id,
+        "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
+    }
+    return jwt.encode(payload, SCREENSHOT_SECRET, algorithm="HS256")
+
+def verify_screenshot_token(token):
+    try:
+        return jwt.decode(token, SCREENSHOT_SECRET, algorithms=["HS256"])["ss_uid"]
+    except:
+        return None
 
 # ---- MySQL Config (Railway Public Proxy) ----
 MYSQL_HOST     = "yamabiko.proxy.rlwy.net"
@@ -310,10 +325,14 @@ def admin_edit_user(user_id):
     conn.commit(); conn.close()
     return jsonify({"ok":True}) if is_ajax() else redirect("/admin")
 
-# Serve screenshot from DB (base64 decoded back to image)
+# Serve screenshot from DB — uses signed token so it works across all workers/dynos
 @app.route("/screenshots/<int:user_id>")
 def serve_screenshot(user_id):
-    if not session.get("admin"): return redirect("/admin")
+    # Accept session-based admin OR a valid signed token in query string
+    token = request.args.get("t")
+    if not session.get("admin"):
+        if not token or verify_screenshot_token(token) != user_id:
+            return "Unauthorized", 403
     conn = get_db()
     with conn.cursor() as cur:
         cur.execute("SELECT screenshot, screenshot_mime FROM users WHERE id=%s", (user_id,))
@@ -321,11 +340,21 @@ def serve_screenshot(user_id):
     conn.close()
     if not row or not row["screenshot"]:
         return "Not found", 404
-    img_data = base64.b64decode(row["screenshot"])
+    try:
+        img_data = base64.b64decode(row["screenshot"])
+    except Exception:
+        return "Invalid image data", 500
     mime = row["screenshot_mime"] or "image/jpeg"
-    return Response(img_data, mimetype=mime)
+    resp = Response(img_data, mimetype=mime)
+    resp.headers["Cache-Control"] = "no-store"
+    return resp
 
-# Download full DB as CSV
+# Generate a signed token so admin JS can load screenshots cross-worker
+@app.route("/admin/screenshot-token/<int:user_id>")
+def screenshot_token(user_id):
+    if not session.get("admin"):
+        return jsonify({"error": "Unauthorized"}), 403
+    return jsonify({"token": make_screenshot_token(user_id)})
 @app.route("/admin/download-db")
 def download_db():
     if not session.get("admin"): return redirect("/admin")
