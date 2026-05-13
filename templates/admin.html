@@ -23,198 +23,62 @@ input[type=text],input[type=email]{padding:8px 12px;background:#0f172a;border:1p
 .btn:hover{opacity:0.85;}
 .download-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:#0f766e;color:white;border:none;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;text-decoration:none;margin-bottom:16px;border:1px solid #14b8a6;}
 .download-btn:hover{background:#0d9488;}
-
-/* Tabs */
 .tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;}
 .tab-btn{padding:7px 16px;border:1px solid #334155;background:#0f172a;color:#94a3b8;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;}
 .tab-btn.active{background:#2563eb;color:white;border-color:#2563eb;}
 .tab-content{display:none;}
 .tab-content.active{display:block;}
-
-/* Pending badge on tab */
 .tab-badge{display:inline-block;background:#dc2626;color:white;border-radius:99px;font-size:10px;padding:1px 7px;margin-left:5px;vertical-align:middle;}
-
-/* User cards */
 .user-card{background:#0f172a;border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid #334155;}
 .user-card.pending-card{border-color:#d97706;box-shadow:0 0 0 1px rgba(217,119,6,0.3);}
-.user-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
 .user-name{font-size:15px;font-weight:700;}
 .user-email{font-size:11px;color:#64748b;margin-top:2px;}
 .badge{display:inline-block;padding:3px 9px;border-radius:6px;font-size:11px;font-weight:600;}
 .badge-green{background:rgba(22,163,74,0.2);color:#4ade80;border:1px solid rgba(22,163,74,0.3);}
 .badge-red{background:rgba(220,38,38,0.2);color:#f87171;border:1px solid rgba(220,38,38,0.3);}
 .badge-yellow{background:rgba(217,119,6,0.2);color:#fbbf24;border:1px solid rgba(217,119,6,0.3);}
-
 .user-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
 .ss-preview{margin-top:10px;display:none;}
 .ss-preview img{width:100%;max-width:380px;border-radius:10px;border:2px solid #d97706;margin-top:8px;}
 .ss-btn{background:none;border:1px solid #d97706;color:#fbbf24;padding:5px 12px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600;}
 .ss-btn:hover{background:rgba(217,119,6,0.15);}
-
-/* Edit form */
 .edit-form{background:#0b1120;border-radius:10px;padding:12px;margin-top:10px;display:none;border:1px solid #334155;}
 .edit-form label{font-size:12px;color:#94a3b8;display:block;margin-bottom:4px;}
 .edit-form input{width:100%;margin-bottom:10px;}
 .edit-form select{width:100%;padding:8px;background:#0f172a;border:1px solid #334155;border-radius:8px;color:white;margin-bottom:10px;}
-
-/* Block section */
 .block-row{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
 .block-uid{background:#dc2626;padding:6px 12px;border-radius:8px;font-size:12px;display:flex;align-items:center;gap:8px;}
-
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
 .stat-card{background:#1e293b;border-radius:12px;padding:14px;text-align:center;border:1px solid #334155;}
 .stat-card .num{font-size:1.8rem;font-weight:800;color:#60a5fa;}
 .stat-card .lbl{font-size:11px;color:#64748b;margin-top:4px;}
-
 .empty{color:#475569;font-size:13px;text-align:center;padding:20px 0;}
 </style>
 </head>
 <body>
 
-<h1>⚡ Shani Store — Admin Panel</h1>
-<div class="nav">
-  <a href="/">🏠 Home</a>
-  <a href="/logs">📋 Logs</a>
-  <a href="/logout">🚪 Logout</a>
-</div>
-
-<!-- Stats -->
-{% set total = users|length %}
-{% set unlocked_count = users|selectattr('unlocked','equalto',1)|list|length %}
-{% set pending_count = users|selectattr('pending_payment','equalto',1)|list|length %}
-<div class="stats">
-  <div class="stat-card">
-    <div class="num">{{ total }}</div>
-    <div class="lbl">Total Users</div>
-  </div>
-  <div class="stat-card">
-    <div class="num" style="color:#4ade80;">{{ unlocked_count }}</div>
-    <div class="lbl">Unlocked</div>
-  </div>
-  <div class="stat-card">
-    <div class="num" style="color:#fbbf24;">{{ pending_count }}</div>
-    <div class="lbl">Pending Payment</div>
-  </div>
-</div>
-
-<!-- Download DB CSV -->
-<a href="/admin/download-db" class="download-btn">⬇️ Download Full Database (CSV)</a>
-
-<!-- Users Section with Tabs -->
-<div class="section">
-  <h2>👥 Users</h2>
-
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('all', this)">
-      All Users <span class="tab-badge" style="background:#475569;">{{ total }}</span>
-    </button>
-    <button class="tab-btn" onclick="switchTab('pending', this)">
-      ⏳ Payment Pending
-      {% if pending_count > 0 %}<span class="tab-badge">{{ pending_count }}</span>{% endif %}
-    </button>
-    <button class="tab-btn" onclick="switchTab('approved', this)">
-      ✅ Approved <span class="tab-badge" style="background:#16a34a;">{{ unlocked_count }}</span>
-    </button>
-    <button class="tab-btn" onclick="switchTab('locked', this)">
-      🔒 Locked
-    </button>
-  </div>
-
-  <!-- ALL USERS TAB -->
-  <div class="tab-content active" id="tab-all">
-    {% if not users %}
-    <p class="empty">No users yet</p>
-    {% endif %}
-    {% for u in users %}
-      {{ render_user_card(u) }}
-    {% endfor %}
-  </div>
-
-  <!-- PENDING TAB -->
-  <div class="tab-content" id="tab-pending">
-    {% set pending_users = users|selectattr('pending_payment','equalto',1)|list %}
-    {% if not pending_users %}
-    <p class="empty">📭 Koi pending payment nahi</p>
-    {% endif %}
-    {% for u in pending_users %}
-      {{ render_user_card(u) }}
-    {% endfor %}
-  </div>
-
-  <!-- APPROVED TAB -->
-  <div class="tab-content" id="tab-approved">
-    {% set approved_users = users|selectattr('unlocked','equalto',1)|list %}
-    {% if not approved_users %}
-    <p class="empty">No approved users yet</p>
-    {% endif %}
-    {% for u in approved_users %}
-      {{ render_user_card(u) }}
-    {% endfor %}
-  </div>
-
-  <!-- LOCKED TAB -->
-  <div class="tab-content" id="tab-locked">
-    {% set locked_users = users|selectattr('unlocked','equalto',0)|selectattr('pending_payment','equalto',0)|list %}
-    {% if not locked_users %}
-    <p class="empty">No locked users</p>
-    {% endif %}
-    {% for u in locked_users %}
-      {{ render_user_card(u) }}
-    {% endfor %}
-  </div>
-</div>
-
-<!-- Block UIDs -->
-<div class="section">
-  <h2>🚫 Block UID</h2>
-  <form method="POST" action="/block">
-    <div class="block-row">
-      <input type="text" name="uid" placeholder="UID enter karein">
-      <button type="submit" class="btn btn-red">Block</button>
-    </div>
-  </form>
-  {% if uids %}
-  <div style="display:flex;flex-wrap:wrap;gap:8px;">
-    {% for uid in uids %}
-    <div class="block-uid">
-      {{ uid }}
-      <form method="POST" action="/unblock" style="display:inline;">
-        <input type="hidden" name="uid" value="{{ uid }}">
-        <button type="submit" style="background:none;border:none;color:white;cursor:pointer;font-size:13px;">✕</button>
-      </form>
-    </div>
-    {% endfor %}
-  </div>
-  {% else %}
-  <p style="color:#475569;font-size:12px;">Koi blocked UID nahi</p>
-  {% endif %}
-</div>
-
-<!-- Macro for user card (used in multiple tabs) -->
+{# MACRO MUST BE DEFINED FIRST BEFORE USE #}
 {% macro render_user_card(u) %}
 <div class="user-card {% if u.pending_payment %}pending-card{% endif %}">
-  <div class="user-header">
-    <div>
-      <div class="user-name">👤 {{ u.username }}</div>
-      <div class="user-email">{{ u.email }}</div>
-      <div style="margin-top:6px;display:flex;gap:5px;flex-wrap:wrap;">
-        {% if u.unlocked %}
-        <span class="badge badge-green">✅ Unlocked</span>
-        {% else %}
-        <span class="badge badge-red">🔒 Locked</span>
-        {% endif %}
-        {% if u.pending_payment %}
-        <span class="badge badge-yellow">⏳ Payment Pending</span>
-        {% endif %}
-      </div>
-      <div style="font-size:10px;color:#475569;margin-top:4px;">
-        Joined: {{ u.created_at.strftime('%Y-%m-%d') if u.created_at else '—' }}
-        {% if u.unlocked_at %}| Approved: {{ u.unlocked_at.strftime('%Y-%m-%d') if u.unlocked_at else '—' }}{% endif %}
-      </div>
+  <div style="margin-bottom:10px;">
+    <div class="user-name">👤 {{ u.username }}</div>
+    <div class="user-email">{{ u.email }}</div>
+    <div style="margin-top:6px;display:flex;gap:5px;flex-wrap:wrap;">
+      {% if u.unlocked %}
+      <span class="badge badge-green">✅ Unlocked</span>
+      {% else %}
+      <span class="badge badge-red">🔒 Locked</span>
+      {% endif %}
+      {% if u.pending_payment %}
+      <span class="badge badge-yellow">⏳ Payment Pending</span>
+      {% endif %}
+    </div>
+    <div style="font-size:10px;color:#475569;margin-top:4px;">
+      Joined: {{ u.created_at.strftime('%Y-%m-%d') if u.created_at else '—' }}
+      {% if u.unlocked_at %} | Approved: {{ u.unlocked_at.strftime('%Y-%m-%d') if u.unlocked_at else '—' }}{% endif %}
     </div>
   </div>
 
-  <!-- Screenshot button (only if has screenshot) -->
   {% if u.has_screenshot %}
   <button class="ss-btn" onclick="toggleSS('ss_{{u.id}}', this)">📸 Payment Screenshot Dekho</button>
   <div class="ss-preview" id="ss_{{u.id}}">
@@ -222,7 +86,6 @@ input[type=text],input[type=email]{padding:8px 12px;background:#0f172a;border:1p
   </div>
   {% endif %}
 
-  <!-- Action buttons -->
   <div class="user-actions">
     {% if u.pending_payment %}
     <form method="POST" action="/admin/approve/{{ u.id }}">
@@ -249,7 +112,6 @@ input[type=text],input[type=email]{padding:8px 12px;background:#0f172a;border:1p
     </form>
   </div>
 
-  <!-- Edit form -->
   <div class="edit-form" id="edit_{{u.id}}">
     <form method="POST" action="/admin/edit-user/{{ u.id }}">
       <label>Username</label>
@@ -267,6 +129,92 @@ input[type=text],input[type=email]{padding:8px 12px;background:#0f172a;border:1p
   </div>
 </div>
 {% endmacro %}
+
+<h1>⚡ Shani Store — Admin Panel</h1>
+<div class="nav">
+  <a href="/">🏠 Home</a>
+  <a href="/logs">📋 Logs</a>
+  <a href="/logout">🚪 Logout</a>
+</div>
+
+{% set total = users|length %}
+{% set unlocked_count = users|selectattr('unlocked','equalto',1)|list|length %}
+{% set pending_count = users|selectattr('pending_payment','equalto',1)|list|length %}
+
+<div class="stats">
+  <div class="stat-card">
+    <div class="num">{{ total }}</div>
+    <div class="lbl">Total Users</div>
+  </div>
+  <div class="stat-card">
+    <div class="num" style="color:#4ade80;">{{ unlocked_count }}</div>
+    <div class="lbl">Unlocked</div>
+  </div>
+  <div class="stat-card">
+    <div class="num" style="color:#fbbf24;">{{ pending_count }}</div>
+    <div class="lbl">Pending Payment</div>
+  </div>
+</div>
+
+<a href="/admin/download-db" class="download-btn">⬇️ Download Full Database (CSV)</a>
+
+<div class="section">
+  <h2>👥 Users</h2>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('all', this)">All <span class="tab-badge" style="background:#475569;">{{ total }}</span></button>
+    <button class="tab-btn" onclick="switchTab('pending', this)">⏳ Pending {% if pending_count > 0 %}<span class="tab-badge">{{ pending_count }}</span>{% endif %}</button>
+    <button class="tab-btn" onclick="switchTab('approved', this)">✅ Approved <span class="tab-badge" style="background:#16a34a;">{{ unlocked_count }}</span></button>
+    <button class="tab-btn" onclick="switchTab('locked', this)">🔒 Locked</button>
+  </div>
+
+  <div class="tab-content active" id="tab-all">
+    {% if not users %}<p class="empty">No users yet</p>{% endif %}
+    {% for u in users %}{{ render_user_card(u) }}{% endfor %}
+  </div>
+
+  <div class="tab-content" id="tab-pending">
+    {% set pending_users = users|selectattr('pending_payment','equalto',1)|list %}
+    {% if not pending_users %}<p class="empty">📭 Koi pending payment nahi</p>{% endif %}
+    {% for u in pending_users %}{{ render_user_card(u) }}{% endfor %}
+  </div>
+
+  <div class="tab-content" id="tab-approved">
+    {% set approved_users = users|selectattr('unlocked','equalto',1)|list %}
+    {% if not approved_users %}<p class="empty">No approved users yet</p>{% endif %}
+    {% for u in approved_users %}{{ render_user_card(u) }}{% endfor %}
+  </div>
+
+  <div class="tab-content" id="tab-locked">
+    {% set locked_users = users|selectattr('unlocked','equalto',0)|selectattr('pending_payment','equalto',0)|list %}
+    {% if not locked_users %}<p class="empty">No locked users</p>{% endif %}
+    {% for u in locked_users %}{{ render_user_card(u) }}{% endfor %}
+  </div>
+</div>
+
+<div class="section">
+  <h2>🚫 Block UID</h2>
+  <form method="POST" action="/block">
+    <div class="block-row">
+      <input type="text" name="uid" placeholder="UID enter karein">
+      <button type="submit" class="btn btn-red">Block</button>
+    </div>
+  </form>
+  {% if uids %}
+  <div style="display:flex;flex-wrap:wrap;gap:8px;">
+    {% for uid in uids %}
+    <div class="block-uid">
+      {{ uid }}
+      <form method="POST" action="/unblock" style="display:inline;">
+        <input type="hidden" name="uid" value="{{ uid }}">
+        <button type="submit" style="background:none;border:none;color:white;cursor:pointer;font-size:13px;">✕</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p style="color:#475569;font-size:12px;">Koi blocked UID nahi</p>
+  {% endif %}
+</div>
 
 <script>
 function toggleSS(id, btn) {
